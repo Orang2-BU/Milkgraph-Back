@@ -2,30 +2,22 @@ package api_test
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"strings"
+	"os"
 	"testing"
 
 	"milkgraph/internal/api"
+	"milkgraph/internal/sse"
+	"milkgraph/internal/store"
 )
 
 type TestClient struct {
-	server  *api.Server
 	handler http.Handler
 	role    string
-}
-
-func newClient(role string) *TestClient {
-	s := &api.Server{Mode: "demo"}
-	return &TestClient{
-		server:  s,
-		handler: s.Handler(),
-		role:    role,
-	}
 }
 
 func (c *TestClient) do(method, path string, body any) (*http.Response, map[string]any, error) {
@@ -74,6 +66,42 @@ func (c *TestClient) doList(method, path string, body any) (*http.Response, []an
 
 // Test 16-Step Demo Scenario from 05-INTEGRASI-FE-BE.md §7
 func TestSixteenStepDemoScenario(t *testing.T) {
+	dsn := os.Getenv("TEST_DATABASE_URL")
+	if dsn == "" {
+		dsn = os.Getenv("MILKGRAPH_TEST_DATABASE_URL")
+	}
+	if dsn == "" {
+		t.Skip("set TEST_DATABASE_URL to isolated PostgreSQL to run 16-step scenario")
+	}
+
+	ctx := context.Background()
+	db, err := store.Open(ctx, dsn)
+	if err != nil {
+		t.Fatalf("open store failed: %v", err)
+	}
+	defer db.Close()
+
+	hub := sse.New(db)
+	hub.Run(ctx)
+	defer hub.Close()
+
+	srv := &api.Server{
+		Mode: "demo",
+		DB:   db,
+		Hub:  hub,
+	}
+	if err := srv.Bootstrap(ctx); err != nil {
+		t.Fatalf("bootstrap failed: %v", err)
+	}
+	h := srv.Handler()
+
+	newClient := func(role string) *TestClient {
+		return &TestClient{
+			handler: h,
+			role:    role,
+		}
+	}
+
 	client := newClient("planner")
 
 	// Step 0: Reset demo state
@@ -184,7 +212,7 @@ func TestSixteenStepDemoScenario(t *testing.T) {
 	}
 
 	// Step 10: QA decides lab result LAB-9031 (RT-27) release
-	res, labResp, _ := qaClient.do("POST", "/lab/results/LAB-9031/decision", map[string]any{
+	res, _, _ = qaClient.do("POST", "/lab/results/LAB-9031/decision", map[string]any{
 		"status": "dirilis",
 		"note":   "Parameter memenuhi spesifikasi SNI",
 	})

@@ -9,13 +9,13 @@ import (
 )
 
 type SeedData struct {
-	Scenario   map[string]any
-	Ops        map[string]any
-	Site       map[string]any
-	Roles      map[string]any
-	Limits     map[string]any
-	Golden     map[string]any
-	mu         sync.RWMutex
+	Scenario map[string]any
+	Ops      map[string]any
+	Site     map[string]any
+	Roles    map[string]any
+	Limits   map[string]any
+	Golden   map[string]any
+	mu       sync.RWMutex
 }
 
 func loadJSON(filename string) (map[string]any, error) {

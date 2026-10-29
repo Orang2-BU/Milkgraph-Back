@@ -221,16 +221,16 @@ type LabDecision struct {
 }
 
 type LabResultView struct {
-	ID       string          `json:"id"`
-	Kind     string          `json:"kind"`
-	Subject  string          `json:"subject"`
-	Detail   string          `json:"detail"`
-	Sampled  string          `json:"sampled"`
-	Status   string          `json:"status"`
-	Params   []any           `json:"params"`
-	Source   string          `json:"source"`
-	Decision *LabDecision    `json:"decision,omitempty"`
-	Eta      string          `json:"eta,omitempty"`
+	ID       string       `json:"id"`
+	Kind     string       `json:"kind"`
+	Subject  string       `json:"subject"`
+	Detail   string       `json:"detail"`
+	Sampled  string       `json:"sampled"`
+	Status   string       `json:"status"`
+	Params   []any        `json:"params"`
+	Source   string       `json:"source"`
+	Decision *LabDecision `json:"decision,omitempty"`
+	Eta      string       `json:"eta,omitempty"`
 }
 
 type WriteResponse struct {
