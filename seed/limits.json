@@ -1,0 +1,21 @@
+{
+  "defaults": {
+    "maxTransfer": 9000,
+    "starvationTol": 20,
+    "maintenanceBay3": false,
+    "holdingMin": 630,
+    "bufferMaxMin": 1080,
+    "cipBuffer": 0,
+    "breakdownF1": false,
+    "tankMax": 95,
+    "changeoverMax": 2
+  },
+  "sopChangeover": {
+    "UHT Full Cream 1 L>UHT Cokelat 200 ml": 35,
+    "UHT Full Cream 1 L>UHT Stroberi 200 ml": 40,
+    "UHT Cokelat 200 ml>UHT Full Cream 1 L": 45,
+    "UHT Cokelat 200 ml>UHT Stroberi 200 ml": 25,
+    "UHT Stroberi 200 ml>UHT Full Cream 1 L": 50,
+    "UHT Stroberi 200 ml>UHT Cokelat 200 ml": 30
+  }
+}

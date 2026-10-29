@@ -1,0 +1,1195 @@
+{
+  "PROCESS_LOSS": 0.03,
+  "UNIT_STATE": {
+    "jalan": {
+      "label": "Jalan",
+      "tone": "ok"
+    },
+    "cip": {
+      "label": "CIP",
+      "tone": "warn"
+    },
+    "siaga": {
+      "label": "Siaga",
+      "tone": "neutral"
+    },
+    "breakdown": {
+      "label": "Breakdown",
+      "tone": "crit"
+    },
+    "ganti-format": {
+      "label": "Ganti format",
+      "tone": "warn"
+    }
+  },
+  "asepticTanks": [
+    {
+      "id": "AT-1",
+      "sterilizer": "UHT-1",
+      "sterilizerState": "jalan",
+      "product": "UHT Full Cream 1 L",
+      "level": 18600,
+      "capacity": 30000,
+      "inflow": {
+        "before": 6900,
+        "after": 6900
+      },
+      "fillers": [
+        "F1",
+        "F3"
+      ],
+      "planned": true
+    },
+    {
+      "id": "AT-2",
+      "sterilizer": "UHT-2",
+      "sterilizerState": "jalan",
+      "product": "UHT Stroberi",
+      "level": 1480,
+      "capacity": 30000,
+      "inflow": {
+        "before": 6990,
+        "after": 8540
+      },
+      "fillers": [
+        "F2",
+        "F4"
+      ],
+      "planned": true
+    },
+    {
+      "id": "AT-3",
+      "sterilizer": "UHT-3",
+      "sterilizerState": "cip",
+      "product": "UHT Cokelat",
+      "level": 0,
+      "capacity": 30000,
+      "inflow": {
+        "before": 0,
+        "after": 0
+      },
+      "fillers": [
+        "F5",
+        "F6"
+      ],
+      "planned": false
+    },
+    {
+      "id": "AT-4",
+      "sterilizer": "UHT-4",
+      "sterilizerState": "jalan",
+      "product": "UHT Low Fat",
+      "level": 21300,
+      "capacity": 30000,
+      "inflow": {
+        "before": 6200,
+        "after": 6200
+      },
+      "fillers": [
+        "F7",
+        "F8"
+      ],
+      "planned": false
+    },
+    {
+      "id": "AT-5",
+      "sterilizer": "UHT-5",
+      "sterilizerState": "siaga",
+      "product": "UHT Full Cream 200 ml",
+      "level": 0,
+      "capacity": 30000,
+      "inflow": {
+        "before": 0,
+        "after": 0
+      },
+      "fillers": [
+        "F9",
+        "F10"
+      ],
+      "planned": false
+    }
+  ],
+  "changeoverMatrix": {
+    "products": [
+      "UHT Full Cream 1 L",
+      "UHT Cokelat 200 ml",
+      "UHT Stroberi 200 ml"
+    ],
+    "minutes": [
+      [
+        0,
+        35,
+        40
+      ],
+      [
+        45,
+        0,
+        25
+      ],
+      [
+        50,
+        30,
+        0
+      ]
+    ],
+    "note": "Ganti size (1 L ke 200 ml) butuh penggantian format; ganti rasa butuh bilas produk; dari rasa ke Full Cream wajib bilas lebih lama. Ganti roll kemasan (paper) 15 menit di semua kombinasi."
+  },
+  "cipLog": [
+    {
+      "asset": "Bay 1",
+      "last": "06.10",
+      "hoursSince": 8.5,
+      "next": "18.30",
+      "status": "Siap",
+      "tone": "ok"
+    },
+    {
+      "asset": "Bay 2",
+      "last": "14.10",
+      "hoursSince": 0,
+      "next": "Berjalan, selesai 15.20",
+      "status": "CIP berjalan",
+      "tone": "warn"
+    },
+    {
+      "asset": "Bay 3",
+      "last": "08.40",
+      "hoursSince": 6,
+      "next": "20.10",
+      "status": "Siap",
+      "tone": "ok"
+    },
+    {
+      "asset": "RMT-1",
+      "last": "13 Okt 22.05",
+      "hoursSince": 16.6,
+      "next": "Setelah kosong, perkiraan 19.40",
+      "status": "Siap",
+      "tone": "ok"
+    },
+    {
+      "asset": "RMT-2",
+      "last": "13 Okt 20.30",
+      "hoursSince": 18.2,
+      "next": "Setelah kosong, perkiraan 21.15",
+      "status": "Mendekati batas 24 jam [asumsi]",
+      "tone": "warn"
+    },
+    {
+      "asset": "RMT-3",
+      "last": "14 Okt 09.20",
+      "hoursSince": 5.4,
+      "next": "Setelah kosong",
+      "status": "Siap",
+      "tone": "ok"
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "scada",
+      "name": "Historian SCADA",
+      "system": "Level tangki, flowmeter bay, suhu",
+      "protocol": "OPC UA, read-only",
+      "feeds": "RawMilkBuffer, Bay, TRANSFER",
+      "interval": "10 detik",
+      "lastSync": "14.42",
+      "records": "214 tag",
+      "status": "terhubung",
+      "latencyMs": 180
+    },
+    {
+      "id": "lims",
+      "name": "LIMS",
+      "system": "Hasil lab penerimaan RT dan QC barang jadi",
+      "protocol": "REST API, read-only",
+      "feeds": "LabResult, TESTED",
+      "interval": "1 menit",
+      "lastSync": "14.41",
+      "records": "46 hasil hari ini",
+      "status": "terhubung",
+      "latencyMs": 420
+    },
+    {
+      "id": "weighbridge",
+      "name": "Weighbridge",
+      "system": "Tiket timbang RT masuk dan keluar",
+      "protocol": "Ekspor CSV per tiket",
+      "feeds": "RoadTanker, FILLED_INTO",
+      "interval": "Per tiket",
+      "lastSync": "14.30",
+      "records": "31 tiket hari ini",
+      "status": "terhubung",
+      "latencyMs": 950
+    },
+    {
+      "id": "cip",
+      "name": "Kontroler CIP",
+      "system": "Siklus alkali, asam, bilas per aset",
+      "protocol": "OPC UA, read-only",
+      "feeds": "CIPEvent, OCCUPIES",
+      "interval": "30 detik",
+      "lastSync": "14.42",
+      "records": "9 siklus hari ini",
+      "status": "terhubung",
+      "latencyMs": 210
+    },
+    {
+      "id": "mes",
+      "name": "MES filling",
+      "system": "Kecepatan mesin, lot, changeover",
+      "protocol": "OPC UA, read-only",
+      "feeds": "FillingMachine, FinishedGoodsLot, FILLED",
+      "interval": "1 menit",
+      "lastSync": "14.41",
+      "records": "12 lot hari ini",
+      "status": "terhubung",
+      "latencyMs": 330
+    },
+    {
+      "id": "erp",
+      "name": "ERP gudang",
+      "system": "Stok dan status kirim lot barang jadi",
+      "protocol": "Batch harian, read-only",
+      "feeds": "Status lot di gudang",
+      "interval": "Harian 06.00",
+      "lastSync": "06.00",
+      "records": "1.284 lot",
+      "status": "tertunda",
+      "latencyMs": 0
+    }
+  ],
+  "demandPlan": [
+    {
+      "sku": "UHT Full Cream 1 L",
+      "pack": "Big Pack",
+      "packs": 96000,
+      "litresPerPack": 1,
+      "milk": 1.02
+    },
+    {
+      "sku": "UHT Low Fat 1 L",
+      "pack": "Big Pack",
+      "packs": 38000,
+      "litresPerPack": 1,
+      "milk": 1.09
+    },
+    {
+      "sku": "UHT Stroberi 200 ml",
+      "pack": "Medium Pack",
+      "packs": 240000,
+      "litresPerPack": 0.2,
+      "milk": 0.91
+    },
+    {
+      "sku": "UHT Cokelat 200 ml",
+      "pack": "Medium Pack",
+      "packs": 210000,
+      "litresPerPack": 0.2,
+      "milk": 0.89
+    },
+    {
+      "sku": "UHT Low Fat 250 ml",
+      "pack": "Medium Pack",
+      "packs": 120000,
+      "litresPerPack": 0.25,
+      "milk": 1.09
+    },
+    {
+      "sku": "UHT Stroberi Kids 105 ml",
+      "pack": "Small Pack",
+      "packs": 180000,
+      "litresPerPack": 0.105,
+      "milk": 0.91
+    }
+  ],
+  "farms": [
+    {
+      "name": "KUD Ngantang",
+      "plannedRt": 8,
+      "plannedL": 87600,
+      "arrived": 5,
+      "onTheWay": 1,
+      "passRate": 97.4,
+      "finding": "-",
+      "coolingC": 4.1,
+      "tone": "ok"
+    },
+    {
+      "name": "Farm Sumberejo",
+      "plannedRt": 7,
+      "plannedL": 70800,
+      "arrived": 5,
+      "onTheWay": 1,
+      "passRate": 98.6,
+      "finding": "-",
+      "coolingC": 3.7,
+      "tone": "ok"
+    },
+    {
+      "name": "Farm Tutur",
+      "plannedRt": 6,
+      "plannedL": 56300,
+      "arrived": 4,
+      "onTheWay": 1,
+      "passRate": 99.1,
+      "finding": "-",
+      "coolingC": 3.8,
+      "tone": "ok"
+    },
+    {
+      "name": "Farm Pujon Kidul",
+      "plannedRt": 5,
+      "plannedL": 52100,
+      "arrived": 3,
+      "onTheWay": 1,
+      "passRate": 95.8,
+      "finding": "Alcohol test positif 9 Okt",
+      "coolingC": 4.2,
+      "tone": "warn"
+    },
+    {
+      "name": "Farm Ngadirejo",
+      "plannedRt": 5,
+      "plannedL": 44000,
+      "arrived": 3,
+      "onTheWay": 0,
+      "passRate": 96.2,
+      "finding": "Antibiotik mendekati batas 13 Okt (RT-04)",
+      "coolingC": 3.9,
+      "tone": "warn"
+    }
+  ],
+  "fillers": [
+    {
+      "id": "F1",
+      "resource": "Filling F1",
+      "product": "UHT Full Cream 1 L",
+      "pack": "Big Pack",
+      "speed": 104,
+      "target": 110,
+      "output": 10420,
+      "litres": 6550,
+      "state": "jalan",
+      "note": "Changeover size 16.00, lalu UHT Cokelat 200 ml",
+      "source": "FILL-F1"
+    },
+    {
+      "id": "F3",
+      "resource": "Filling F3",
+      "product": "UHT Full Cream 1 L",
+      "pack": "Big Pack",
+      "speed": 0,
+      "target": 110,
+      "output": 4310,
+      "litres": 0,
+      "state": "siaga",
+      "note": "Siaga, AT-1 cukup untuk satu lini",
+      "source": "FILL-F1"
+    },
+    {
+      "id": "F2",
+      "resource": "Filling F2",
+      "product": "UHT Stroberi 200 ml",
+      "pack": "Medium Pack",
+      "speed": 518,
+      "target": 540,
+      "output": 51870,
+      "litres": 6400,
+      "state": "jalan",
+      "note": "Sepanjang shift",
+      "source": "FILL-F2"
+    },
+    {
+      "id": "F4",
+      "resource": "Filling F4",
+      "product": "UHT Stroberi Kids 105 ml",
+      "pack": "Small Pack",
+      "speed": 286,
+      "target": 300,
+      "output": 27940,
+      "litres": 1890,
+      "state": "jalan",
+      "note": "Berbagi AT-2 dengan F2",
+      "source": "FILL-F4"
+    },
+    {
+      "id": "F5",
+      "resource": "Filling F5",
+      "product": "UHT Cokelat 200 ml",
+      "pack": "Medium Pack",
+      "speed": 0,
+      "target": 540,
+      "output": 38200,
+      "litres": 0,
+      "state": "cip",
+      "note": "Ikut CIP UHT-3 sampai 15.10",
+      "source": "CIP-LOG"
+    },
+    {
+      "id": "F6",
+      "resource": "Filling F6",
+      "product": "UHT Cokelat 200 ml",
+      "pack": "Medium Pack",
+      "speed": 0,
+      "target": 540,
+      "output": 36950,
+      "litres": 0,
+      "state": "cip",
+      "note": "Ikut CIP UHT-3 sampai 15.10",
+      "source": "CIP-LOG"
+    },
+    {
+      "id": "F7",
+      "resource": "Filling F7",
+      "product": "UHT Low Fat 1 L",
+      "pack": "Big Pack",
+      "speed": 101,
+      "target": 110,
+      "output": 9880,
+      "litres": 6060,
+      "state": "jalan",
+      "note": "Sepanjang shift",
+      "source": "FILL-F1"
+    },
+    {
+      "id": "F8",
+      "resource": "Filling F8",
+      "product": "UHT Low Fat 250 ml",
+      "pack": "Medium Pack",
+      "speed": 0,
+      "target": 420,
+      "output": 12300,
+      "litres": 0,
+      "state": "ganti-format",
+      "note": "Ganti format 1 L ke 250 ml sampai 15.05",
+      "source": "FILL-F1"
+    },
+    {
+      "id": "F9",
+      "resource": "Filling F9",
+      "product": "UHT Full Cream 200 ml",
+      "pack": "Medium Pack",
+      "speed": 0,
+      "target": 540,
+      "output": 0,
+      "litres": 0,
+      "state": "siaga",
+      "note": "Siaga, menunggu UHT-5",
+      "source": "FILL-F2"
+    },
+    {
+      "id": "F10",
+      "resource": "Filling F10",
+      "product": "UHT Full Cream 200 ml",
+      "pack": "Medium Pack",
+      "speed": 0,
+      "target": 540,
+      "output": 0,
+      "litres": 0,
+      "state": "breakdown",
+      "note": "Seal jaw rusak, tiket MT-2231, perkiraan pulih 16.30",
+      "source": "FILL-F2"
+    }
+  ],
+  "labResults": [
+    {
+      "id": "LAB-9031",
+      "kind": "penerimaan",
+      "subject": "RT-27",
+      "detail": "Farm Pujon Kidul · 10.600 L",
+      "sampled": "13.56",
+      "status": "hasil-siap",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "4,1 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "TPC",
+          "value": "410.000 CFU/ml",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": true
+        },
+        {
+          "name": "Lemak",
+          "value": "3,6%",
+          "limit": "≥ 3,0%",
+          "ok": true
+        },
+        {
+          "name": "Protein",
+          "value": "3,1%",
+          "limit": "≥ 2,8%",
+          "ok": true
+        }
+      ],
+      "source": "WB-27"
+    },
+    {
+      "id": "LAB-9032",
+      "kind": "penerimaan",
+      "subject": "RT-28",
+      "detail": "Farm Sumberejo · 9.900 L",
+      "sampled": "13.57",
+      "status": "hasil-siap",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "3,9 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "TPC",
+          "value": "620.000 CFU/ml",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": true
+        },
+        {
+          "name": "Lemak",
+          "value": "3,4%",
+          "limit": "≥ 3,0%",
+          "ok": true
+        },
+        {
+          "name": "Protein",
+          "value": "3,0%",
+          "limit": "≥ 2,8%",
+          "ok": true
+        }
+      ],
+      "source": "WB-28"
+    },
+    {
+      "id": "LAB-9029",
+      "kind": "penerimaan",
+      "subject": "RT-24",
+      "detail": "Farm Ngadirejo · 8.800 L",
+      "sampled": "13.43",
+      "status": "uji-ulang",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "4,3 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Meragukan, diulang",
+          "limit": "Negatif",
+          "ok": null
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "TPC",
+          "value": "780.000 CFU/ml",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": true
+        },
+        {
+          "name": "Lemak",
+          "value": "3,3%",
+          "limit": "≥ 3,0%",
+          "ok": true
+        },
+        {
+          "name": "Protein",
+          "value": "2,9%",
+          "limit": "≥ 2,8%",
+          "ok": true
+        }
+      ],
+      "source": "WB-24"
+    },
+    {
+      "id": "LAB-9035",
+      "kind": "penerimaan",
+      "subject": "RT-29",
+      "detail": "KUD Ngantang · 10.800 L",
+      "sampled": "14.24",
+      "status": "dalam-uji",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "3,7 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Berjalan",
+          "limit": "Negatif",
+          "ok": null
+        },
+        {
+          "name": "TPC",
+          "value": "Berjalan",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": null
+        },
+        {
+          "name": "Lemak",
+          "value": "3,5%",
+          "limit": "≥ 3,0%",
+          "ok": true
+        },
+        {
+          "name": "Protein",
+          "value": "3,0%",
+          "limit": "≥ 2,8%",
+          "ok": true
+        }
+      ],
+      "source": "WB-29"
+    },
+    {
+      "id": "LAB-9036",
+      "kind": "penerimaan",
+      "subject": "RT-30",
+      "detail": "Farm Tutur · 9.200 L",
+      "sampled": "14.30",
+      "status": "dalam-uji",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "3,9 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Berjalan",
+          "limit": "Negatif",
+          "ok": null
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Berjalan",
+          "limit": "Negatif",
+          "ok": null
+        },
+        {
+          "name": "TPC",
+          "value": "Berjalan",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": null
+        },
+        {
+          "name": "Lemak",
+          "value": "Berjalan",
+          "limit": "≥ 3,0%",
+          "ok": null
+        },
+        {
+          "name": "Protein",
+          "value": "Berjalan",
+          "limit": "≥ 2,8%",
+          "ok": null
+        }
+      ],
+      "source": "WB-30"
+    },
+    {
+      "id": "LAB-9027",
+      "kind": "penerimaan",
+      "subject": "RT-26",
+      "detail": "KUD Ngantang · 11.400 L",
+      "sampled": "13.31",
+      "status": "lulus",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "4,4 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "TPC",
+          "value": "690.000 CFU/ml",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": true
+        },
+        {
+          "name": "Lemak",
+          "value": "3,5%",
+          "limit": "≥ 3,0%",
+          "ok": true
+        },
+        {
+          "name": "Protein",
+          "value": "3,0%",
+          "limit": "≥ 2,8%",
+          "ok": true
+        }
+      ],
+      "source": "WB-26"
+    },
+    {
+      "id": "LAB-9024",
+      "kind": "penerimaan",
+      "subject": "RT-23",
+      "detail": "Farm Sumberejo · 10.200 L",
+      "sampled": "12.48",
+      "status": "lulus",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "3,8 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "TPC",
+          "value": "350.000 CFU/ml",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": true
+        },
+        {
+          "name": "Lemak",
+          "value": "3,7%",
+          "limit": "≥ 3,0%",
+          "ok": true
+        },
+        {
+          "name": "Protein",
+          "value": "3,1%",
+          "limit": "≥ 2,8%",
+          "ok": true
+        }
+      ],
+      "source": "WB-23"
+    },
+    {
+      "id": "LAB-9025",
+      "kind": "penerimaan",
+      "subject": "RT-25",
+      "detail": "Farm Tutur · 9.600 L",
+      "sampled": "13.02",
+      "status": "lulus",
+      "params": [
+        {
+          "name": "Suhu tiba",
+          "value": "4,0 °C",
+          "limit": "≤ 4,5 °C",
+          "ok": true
+        },
+        {
+          "name": "Alcohol test 72%",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "Screening antibiotik beta-laktam",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "TPC",
+          "value": "520.000 CFU/ml",
+          "limit": "≤ 1.000.000 CFU/ml",
+          "ok": true
+        },
+        {
+          "name": "Lemak",
+          "value": "3,4%",
+          "limit": "≥ 3,0%",
+          "ok": true
+        },
+        {
+          "name": "Protein",
+          "value": "3,0%",
+          "limit": "≥ 2,8%",
+          "ok": true
+        }
+      ],
+      "source": "WB-25"
+    },
+    {
+      "id": "LAB-8812",
+      "kind": "qc-fg",
+      "subject": "FG-1013-07",
+      "detail": "UHT Cokelat 200 ml · Filling F2",
+      "sampled": "13 Okt 22.05",
+      "status": "positif",
+      "params": [
+        {
+          "name": "Residu antibiotik beta-laktam",
+          "value": "Positif",
+          "limit": "Negatif",
+          "ok": false
+        },
+        {
+          "name": "Inkubasi 7 hari 30 °C",
+          "value": "Belum selesai",
+          "limit": "Steril",
+          "ok": null
+        },
+        {
+          "name": "pH",
+          "value": "6,74",
+          "limit": "6,6 - 6,9",
+          "ok": true
+        }
+      ],
+      "source": "LAB-8812"
+    },
+    {
+      "id": "LAB-8809",
+      "kind": "qc-fg",
+      "subject": "FG-1013-04",
+      "detail": "UHT Full Cream 1 L · Filling F1",
+      "sampled": "13 Okt 19.40",
+      "status": "lulus",
+      "params": [
+        {
+          "name": "Residu antibiotik beta-laktam",
+          "value": "Negatif",
+          "limit": "Negatif",
+          "ok": true
+        },
+        {
+          "name": "Inkubasi 7 hari 30 °C",
+          "value": "Belum selesai",
+          "limit": "Steril",
+          "ok": null
+        },
+        {
+          "name": "pH",
+          "value": "6,71",
+          "limit": "6,6 - 6,9",
+          "ok": true
+        }
+      ],
+      "source": "TR-FILL"
+    }
+  ],
+  "lotLocation": {
+    "FG-1013-05": {
+      "place": "Terkirim ke DC Sidoarjo, 14 Okt 06.10",
+      "shipped": true
+    },
+    "FG-1013-06": {
+      "place": "Gudang FG, rak C-12",
+      "shipped": false
+    },
+    "FG-1013-07": {
+      "place": "Gudang FG, rak C-14",
+      "shipped": false
+    },
+    "FG-1013-08": {
+      "place": "Gudang FG, rak C-15",
+      "shipped": false
+    },
+    "FG-1013-09": {
+      "place": "Gudang FG, rak C-15",
+      "shipped": false
+    }
+  },
+  "midTanks": [
+    {
+      "id": "ST-1",
+      "group": "Storage",
+      "content": "Full Cream terstandar",
+      "level": 22400,
+      "capacity": 40000,
+      "batch": "STB-1014-01",
+      "state": "terisi",
+      "note": "Ke UHT-1"
+    },
+    {
+      "id": "ST-2",
+      "group": "Storage",
+      "content": "Kosong",
+      "level": 0,
+      "capacity": 40000,
+      "batch": "-",
+      "state": "cip",
+      "note": "CIP sampai 15.40, tidak bisa menerima"
+    },
+    {
+      "id": "ST-3",
+      "group": "Storage",
+      "content": "Stroberi base",
+      "level": 31000,
+      "capacity": 40000,
+      "batch": "STB-1014-03",
+      "state": "terisi",
+      "note": "Ke MX-1"
+    },
+    {
+      "id": "ST-4",
+      "group": "Storage",
+      "content": "Kosong",
+      "level": 0,
+      "capacity": 40000,
+      "batch": "-",
+      "state": "kosong",
+      "note": "Siap, CIP 12.10. Tujuan batch berikutnya dari SP-1"
+    },
+    {
+      "id": "ST-5",
+      "group": "Storage",
+      "content": "Low Fat terstandar",
+      "level": 18200,
+      "capacity": 40000,
+      "batch": "STB-1014-05",
+      "state": "terisi",
+      "note": "Ke UHT-4"
+    },
+    {
+      "id": "ST-6",
+      "group": "Storage",
+      "content": "Full Cream terstandar",
+      "level": 36900,
+      "capacity": 40000,
+      "batch": "STB-1014-06",
+      "state": "tertahan",
+      "note": "Menunggu hasil uji lemak, tertahan sejak 13.55"
+    },
+    {
+      "id": "CT-1",
+      "group": "Cream",
+      "content": "Cream 38%",
+      "level": 9800,
+      "capacity": 15000,
+      "batch": "CRB-1014-01",
+      "state": "terisi",
+      "note": "Untuk standardisasi Full Cream"
+    },
+    {
+      "id": "CT-2",
+      "group": "Cream",
+      "content": "Cream 38%",
+      "level": 4100,
+      "capacity": 15000,
+      "batch": "CRB-1014-02",
+      "state": "terisi",
+      "note": "Untuk whipping cream"
+    },
+    {
+      "id": "CT-3",
+      "group": "Cream",
+      "content": "Kosong",
+      "level": 0,
+      "capacity": 15000,
+      "batch": "-",
+      "state": "cip",
+      "note": "CIP sampai 15.00"
+    },
+    {
+      "id": "PM-3",
+      "group": "Premix",
+      "content": "Premix cokelat",
+      "level": 2600,
+      "capacity": 5000,
+      "batch": "PMX-1014-03",
+      "state": "terisi",
+      "note": "Siap untuk MX-2"
+    },
+    {
+      "id": "MX-1",
+      "group": "Mixing",
+      "content": "Stroberi",
+      "level": 14300,
+      "capacity": 20000,
+      "batch": "MXB-1014-02",
+      "state": "terisi",
+      "note": "Ke UHT-2 dan AT-2"
+    },
+    {
+      "id": "MX-2",
+      "group": "Mixing",
+      "content": "Kosong",
+      "level": 0,
+      "capacity": 20000,
+      "batch": "-",
+      "state": "kosong",
+      "note": "Siap"
+    }
+  ],
+  "pastHolds": [
+    {
+      "id": "HOLD-2610",
+      "trigger": "FG-1012-03",
+      "rt": "RT-17",
+      "lots": [
+        {
+          "id": "FG-1012-03",
+          "product": "UHT Full Cream 1 L",
+          "percent": 22,
+          "packs": 9840
+        },
+        {
+          "id": "FG-1012-04",
+          "product": "UHT Full Cream 1 L",
+          "percent": 9,
+          "packs": 9610
+        }
+      ],
+      "note": "TPC FG di atas batas pada inkubasi hari ke-3.",
+      "status": "dilepas",
+      "by": "Hendra Kusuma",
+      "at": "12 Okt 21.10",
+      "review": {
+        "note": "Uji ulang sampel retensi negatif, lot dilepas ke gudang kirim.",
+        "by": "Sri Lestari",
+        "at": "13 Okt 16.20"
+      }
+    }
+  ],
+  "pastLog": [
+    {
+      "id": 4,
+      "kind": "hold",
+      "title": "Hold dilepas",
+      "detail": "HOLD-2610 · FG-1012-03",
+      "note": "Uji ulang sampel retensi negatif, lot dilepas ke gudang kirim.",
+      "by": "Sri Lestari",
+      "role": "QA/Lab",
+      "at": "13 Okt 16.20",
+      "tone": "ok"
+    },
+    {
+      "id": 3,
+      "kind": "rencana",
+      "title": "Rekomendasi disetujui",
+      "detail": "Rencana shift pagi: RT-11 dipindah ke Bay 3",
+      "note": "Bay 1 maintenance seal pompa, koordinasi dengan receiving.",
+      "by": "Rina Wulandari",
+      "role": "Planner PPIC",
+      "at": "13 Okt 07.15",
+      "tone": "ok"
+    },
+    {
+      "id": 2,
+      "kind": "lab",
+      "title": "Hasil lab RT-09 dirilis",
+      "detail": "LAB-8790",
+      "note": "",
+      "by": "Sri Lestari",
+      "role": "QA/Lab",
+      "at": "13 Okt 06.32",
+      "tone": "ok"
+    },
+    {
+      "id": 1,
+      "kind": "lab",
+      "title": "Hasil lab RT-07 ditolak",
+      "detail": "LAB-8786",
+      "note": "Alcohol test positif dua kali, RT dikembalikan ke farm.",
+      "by": "Sri Lestari",
+      "role": "QA/Lab",
+      "at": "13 Okt 05.48",
+      "tone": "crit"
+    }
+  ],
+  "trend": {
+    "months": [
+      "Jan 25",
+      "Mar 25",
+      "Mei 25",
+      "Jul 25",
+      "Sep 25",
+      "Nov 25",
+      "Jan 26",
+      "Mar 26",
+      "Mei 26",
+      "Jul 26",
+      "Sep 26",
+      "Nov 26"
+    ],
+    "demand": [
+      21.4,
+      22.1,
+      22.9,
+      23.3,
+      24.6,
+      25.2,
+      26.1,
+      27.4,
+      28,
+      29.6,
+      30.4,
+      31.9
+    ],
+    "incoming": [
+      248,
+      251,
+      259,
+      262,
+      270,
+      276,
+      284,
+      291,
+      299,
+      306,
+      314,
+      323
+    ],
+    "capacity": 320
+  }
+}

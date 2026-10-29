@@ -1,0 +1,2407 @@
+{
+  "date": "Rabu, 14 Oktober 2026",
+  "now": "14.42",
+  "user": {
+    "name": "Rina Wulandari",
+    "role": "Planner PPIC",
+    "initials": "RW",
+    "shift": "Shift Siang"
+  },
+  "metrics": [
+    {
+      "label": "Throughput receiving",
+      "value": "11,2",
+      "unit": "t/jam",
+      "delta": "2,1 di bawah target 13,3",
+      "trend": [
+        13.1,
+        13.4,
+        12.9,
+        13.2,
+        12.6,
+        12.8,
+        12.1,
+        12.4,
+        11.8,
+        11.6,
+        11.4,
+        11.2
+      ],
+      "source": "THRU-01"
+    },
+    {
+      "label": "Waktu putar RT",
+      "value": "3j 12m",
+      "unit": "",
+      "delta": "38 menit di atas baseline",
+      "trend": [
+        150,
+        148,
+        155,
+        158,
+        161,
+        166,
+        170,
+        174,
+        180,
+        183,
+        188,
+        192
+      ],
+      "source": "TURN-01"
+    },
+    {
+      "label": "Tunggu lab test",
+      "value": "52",
+      "unit": "menit",
+      "delta": "14 menit sejak 13.00",
+      "trend": [
+        24,
+        26,
+        31,
+        29,
+        33,
+        35,
+        40,
+        38,
+        41,
+        44,
+        48,
+        52
+      ],
+      "source": "LAB-QUEUE"
+    },
+    {
+      "label": "Bay aktif",
+      "value": "2",
+      "unit": "/ 3 bay",
+      "delta": "Bay 2 CIP sampai 15.20",
+      "trend": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "source": "BAY-STAT"
+    }
+  ],
+  "stages": [
+    {
+      "id": "farms",
+      "label": "Farms",
+      "count": 3,
+      "status": "3 RT loading",
+      "tone": "neutral"
+    },
+    {
+      "id": "otw",
+      "label": "On the way",
+      "count": 4,
+      "status": "4 RT, tiba 15.05 - 16.20",
+      "tone": "neutral"
+    },
+    {
+      "id": "sampling",
+      "label": "Sampling",
+      "count": 2,
+      "status": "Rata-rata 15 menit",
+      "tone": "ok"
+    },
+    {
+      "id": "lab",
+      "label": "Lab test",
+      "count": 3,
+      "status": "Tunggu 52 menit",
+      "tone": "crit"
+    },
+    {
+      "id": "released",
+      "label": "Released",
+      "count": 1,
+      "status": "RT-26 tunggu bay 24 menit",
+      "tone": "warn"
+    },
+    {
+      "id": "unloading",
+      "label": "Unloading",
+      "count": 2,
+      "status": "Bay 1, Bay 3",
+      "tone": "ok"
+    },
+    {
+      "id": "stored",
+      "label": "Stored",
+      "count": 3,
+      "status": "RMT-2 88% penuh",
+      "tone": "warn"
+    }
+  ],
+  "tankers": [
+    {
+      "id": "RT-23",
+      "farm": "Farm Sumberejo",
+      "volume": 10200,
+      "stage": "Unloading",
+      "wait": 0,
+      "age": "6j 10m",
+      "temperature": 3.8,
+      "tone": "ok",
+      "source": "WB-23"
+    },
+    {
+      "id": "RT-25",
+      "farm": "Farm Tutur",
+      "volume": 9600,
+      "stage": "Unloading",
+      "wait": 0,
+      "age": "5j 50m",
+      "temperature": 4,
+      "tone": "ok",
+      "source": "WB-25"
+    },
+    {
+      "id": "RT-26",
+      "farm": "KUD Ngantang",
+      "volume": 11400,
+      "stage": "Released",
+      "wait": 24,
+      "age": "9j 20m",
+      "temperature": 4.4,
+      "tone": "crit",
+      "source": "WB-26"
+    },
+    {
+      "id": "RT-24",
+      "farm": "Farm Ngadirejo",
+      "volume": 8800,
+      "stage": "Lab test",
+      "wait": 61,
+      "age": "8j 05m",
+      "temperature": 4.3,
+      "tone": "warn",
+      "source": "WB-24"
+    },
+    {
+      "id": "RT-27",
+      "farm": "Farm Pujon Kidul",
+      "volume": 10600,
+      "stage": "Lab test",
+      "wait": 48,
+      "age": "7j 20m",
+      "temperature": 4.1,
+      "tone": "warn",
+      "source": "WB-27"
+    },
+    {
+      "id": "RT-28",
+      "farm": "Farm Sumberejo",
+      "volume": 9900,
+      "stage": "Lab test",
+      "wait": 47,
+      "age": "6j 55m",
+      "temperature": 3.9,
+      "tone": "warn",
+      "source": "WB-28"
+    },
+    {
+      "id": "RT-29",
+      "farm": "KUD Ngantang",
+      "volume": 10800,
+      "stage": "Sampling",
+      "wait": 18,
+      "age": "5j 30m",
+      "temperature": 3.7,
+      "tone": "ok",
+      "source": "WB-29"
+    },
+    {
+      "id": "RT-30",
+      "farm": "Farm Tutur",
+      "volume": 9200,
+      "stage": "Sampling",
+      "wait": 12,
+      "age": "4j 45m",
+      "temperature": 3.9,
+      "tone": "ok",
+      "source": "WB-30"
+    }
+  ],
+  "assets": [
+    {
+      "id": "Bay 1",
+      "kind": "Bay",
+      "status": "Unloading RT-23",
+      "fill": 6300,
+      "capacity": 10200,
+      "unit": "L",
+      "info": "Selesai 15.15",
+      "tone": "ok",
+      "source": "WB-23"
+    },
+    {
+      "id": "Bay 2",
+      "kind": "Bay",
+      "status": "CIP",
+      "fill": 32,
+      "capacity": 70,
+      "unit": "menit",
+      "info": "Selesai 15.20",
+      "tone": "warn",
+      "source": "CIP-LOG"
+    },
+    {
+      "id": "Bay 3",
+      "kind": "Bay",
+      "status": "Unloading RT-25",
+      "fill": 9100,
+      "capacity": 9600,
+      "unit": "L",
+      "info": "Selesai 15.00",
+      "tone": "ok",
+      "source": "WB-25"
+    },
+    {
+      "id": "RMT-1",
+      "kind": "Buffer",
+      "status": "Normal",
+      "fill": 41200,
+      "capacity": 60000,
+      "unit": "L",
+      "info": "3,9 °C",
+      "tone": "ok",
+      "source": "RMT-LEVEL"
+    },
+    {
+      "id": "RMT-2",
+      "kind": "Buffer",
+      "status": "Hampir penuh",
+      "fill": 52800,
+      "capacity": 60000,
+      "unit": "L",
+      "info": "4,1 °C",
+      "tone": "warn",
+      "source": "RMT-LEVEL"
+    },
+    {
+      "id": "RMT-3",
+      "kind": "Buffer",
+      "status": "Normal",
+      "fill": 12400,
+      "capacity": 60000,
+      "unit": "L",
+      "info": "4,0 °C",
+      "tone": "ok",
+      "source": "RMT-LEVEL"
+    }
+  ],
+  "labHistory": [
+    {
+      "hour": "09.00",
+      "minutes": 24
+    },
+    {
+      "hour": "10.00",
+      "minutes": 31
+    },
+    {
+      "hour": "11.00",
+      "minutes": 29
+    },
+    {
+      "hour": "12.00",
+      "minutes": 40
+    },
+    {
+      "hour": "13.00",
+      "minutes": 38
+    },
+    {
+      "hour": "14.00",
+      "minutes": 52
+    }
+  ],
+  "qcEvent": {
+    "lot": "FG-1013-07",
+    "product": "UHT Cokelat 200 ml",
+    "test": "Residu antibiotik beta-laktam",
+    "result": "Positif, di atas batas",
+    "time": "13 Okt 22.40",
+    "source": "LAB-8812"
+  },
+  "holdBaseline": {
+    "lots": 14,
+    "packs": 101200
+  },
+  "sources": [
+    {
+      "id": "THRU-01",
+      "time": "14.42",
+      "title": "Throughput receiving",
+      "detail": "Total volume yang dibongkar per jam dari data weighbridge dan flowmeter bay. Target 13,3 t/jam diturunkan dari kapasitas 320 t/hari [study case]."
+    },
+    {
+      "id": "TURN-01",
+      "time": "14.42",
+      "title": "Waktu putar RT",
+      "detail": "Rata-rata waktu dari RT tiba di weighbridge sampai keluar setelah bongkar, untuk 12 RT terakhir. Baseline FIFO 2j 34m [simulasi]."
+    },
+    {
+      "id": "LAB-QUEUE",
+      "time": "14.42",
+      "title": "Antrean lab test",
+      "detail": "Tiga RT menunggu hasil lab test: RT-24, RT-27, RT-28. Rata-rata tunggu 52 menit. Lab test menjadi gerbang antrean receiving.",
+      "node": "lab-gate"
+    },
+    {
+      "id": "BAY-STAT",
+      "time": "14.42",
+      "title": "Status bay",
+      "detail": "Bay 1 bongkar RT-23, Bay 2 CIP sampai 15.20, Bay 3 bongkar RT-25."
+    },
+    {
+      "id": "WB-20",
+      "time": "13.00",
+      "title": "Weighbridge RT-20",
+      "detail": "RT-20 bongkar di Bay 2, 13.00 - 13.40, 10.100 L."
+    },
+    {
+      "id": "WB-21",
+      "time": "13.00",
+      "title": "Weighbridge RT-21",
+      "detail": "RT-21 bongkar di Bay 1, 13.00 - 13.35, 9.700 L."
+    },
+    {
+      "id": "WB-22",
+      "time": "13.00",
+      "title": "Weighbridge RT-22",
+      "detail": "RT-22 bongkar di Bay 3, 13.00 - 13.45, 10.900 L."
+    },
+    {
+      "id": "WB-23",
+      "time": "14.25",
+      "title": "RT-23 · Farm Sumberejo",
+      "detail": "10.200 L, lab test lolos 13.30, bongkar di Bay 1 mulai 14.25. Suhu tiba 3,8 °C."
+    },
+    {
+      "id": "WB-24",
+      "time": "13.41",
+      "title": "RT-24 · Farm Ngadirejo",
+      "detail": "8.800 L. Lab test diulang karena alcohol test meragukan; hasil diperkirakan 15.30. Umur susu 8j 05m."
+    },
+    {
+      "id": "WB-25",
+      "time": "14.10",
+      "title": "RT-25 · Farm Tutur",
+      "detail": "9.600 L, bongkar di Bay 3 mulai 14.10. Suhu tiba 4,0 °C."
+    },
+    {
+      "id": "WB-26",
+      "time": "14.18",
+      "title": "RT-26 · KUD Ngantang",
+      "detail": "11.400 L, rilis lab 14.18. Menunggu bay 24 menit. Umur susu 9j 20m, batas 10j 30m [asumsi].",
+      "node": "rt-26"
+    },
+    {
+      "id": "WB-27",
+      "time": "13.54",
+      "title": "RT-27 · Farm Pujon Kidul",
+      "detail": "10.600 L, menunggu lab test 48 menit. Umur susu 7j 20m."
+    },
+    {
+      "id": "WB-28",
+      "time": "13.55",
+      "title": "RT-28 · Farm Sumberejo",
+      "detail": "9.900 L, menunggu lab test 47 menit. Umur susu 6j 55m."
+    },
+    {
+      "id": "WB-29",
+      "time": "14.24",
+      "title": "RT-29 · KUD Ngantang",
+      "detail": "10.800 L, sampling sejak 14.24."
+    },
+    {
+      "id": "WB-30",
+      "time": "14.30",
+      "title": "RT-30 · Farm Tutur",
+      "detail": "9.200 L, sampling sejak 14.30."
+    },
+    {
+      "id": "RMT-LEVEL",
+      "time": "14.42",
+      "title": "Level Raw Milk Buffer",
+      "detail": "RMT-1 41.200 L, RMT-2 52.800 L, RMT-3 12.400 L dari kapasitas masing-masing 60.000 L. Suhu 3,9 - 4,1 °C."
+    },
+    {
+      "id": "CIP-B2",
+      "time": "14.10",
+      "title": "CIPEvent Bay 2",
+      "detail": "CIP Bay 2 mulai 14.10, durasi standar 70 menit, selesai 15.20.",
+      "node": "cip-b2"
+    },
+    {
+      "id": "HOLD-RT26",
+      "time": "14.42",
+      "title": "Holding time RT-26",
+      "detail": "Umur susu 9j 20m. Batas dari farm sampai tersimpan dingin 10j 30m adalah parameter [asumsi], akan divalidasi mentor.",
+      "node": "rt-26"
+    },
+    {
+      "id": "HOLD-RT24",
+      "time": "14.42",
+      "title": "Holding time RT-24",
+      "detail": "Umur susu 8j 05m. Prioritas bongkar setelah rilis lab karena paling dekat batas di antara RT berikutnya."
+    },
+    {
+      "id": "FLOW-F2",
+      "time": "14.42",
+      "title": "Pasokan Filling F2 dan F4",
+      "detail": "F2 dan F4 berbagi Aseptic Tank AT-2 dan butuh 8.290 L/jam. Dengan rencana FIFO, RMT-2 telat terisi sehingga UHT-2 harus mengejar 10.200 L/jam, di atas batas transfer 9.000 L/jam; AT-2 kosong 15.50 dan kedua lini berhenti."
+    },
+    {
+      "id": "FILL-F1",
+      "time": "14.42",
+      "title": "Jadwal Filling F1",
+      "detail": "UHT Full Cream 1 L sampai 16.00, changeover size 35 menit, lalu UHT Cokelat 200 ml."
+    },
+    {
+      "id": "FILL-F2",
+      "time": "14.42",
+      "title": "Jadwal Filling F2",
+      "detail": "UHT Stroberi 200 ml sepanjang horizon."
+    },
+    {
+      "id": "MAINT-01",
+      "time": "14.42",
+      "title": "Maintenance window",
+      "detail": "Tidak ada maintenance terjadwal 13.00 - 20.00."
+    },
+    {
+      "id": "PLAN-FIFO",
+      "time": "14.40",
+      "title": "Rencana FIFO shift siang",
+      "detail": "Rencana awal planner: RT dibongkar berdasarkan urutan rilis lab. Diuji solver CP-SAT terhadap 6 constraint."
+    },
+    {
+      "id": "SOLVER-01",
+      "time": "14.42",
+      "title": "Run solver CP-SAT",
+      "detail": "Model: 6 constraint, 9 RT, 3 bay, 2 lini filling. Waktu solve dicatat per skenario [simulasi]."
+    },
+    {
+      "id": "LAB-8812",
+      "time": "13 Okt 22.40",
+      "title": "QC FG out-of-spec FG-1013-07",
+      "detail": "Uji residu antibiotik beta-laktam pada lot FG-1013-07: positif di atas batas. Lot sudah di gudang, belum dikirim.",
+      "node": "lab-8812"
+    },
+    {
+      "id": "LAB-4471",
+      "time": "13 Okt 06.05",
+      "title": "Lab test RT-04 saat penerimaan",
+      "detail": "Screening antibiotik cepat: lolos, nilai mendekati batas deteksi. Alcohol test negatif.",
+      "node": "lab-4471"
+    },
+    {
+      "id": "TR-RMT2",
+      "time": "13 Okt 06.40",
+      "title": "Transfer ke RMT-2",
+      "detail": "RT-02 10.400 L, RT-04 8.800 L, RT-06 9.900 L, RT-09 10.100 L masuk RMT-2, 06.20 - 08.15.",
+      "node": "rmt-2"
+    },
+    {
+      "id": "TR-PROC",
+      "time": "13 Okt 09.00",
+      "title": "Separator, premix, sterilisasi",
+      "detail": "RMT-2 ke Separator SP-1, Premix PM-3 (cokelat), Sterilisasi UHT-2, lalu Aseptic Tank AT-2.",
+      "node": "uht-1"
+    },
+    {
+      "id": "TR-FILL",
+      "time": "13 Okt 18.30",
+      "title": "Filling F2 lot 05 - 09",
+      "detail": "AT-2 ke Filling F2, lima lot UHT 200 ml antara 13.10 dan 21.30.",
+      "node": "f2"
+    },
+    {
+      "id": "GEN-01",
+      "time": "14.42",
+      "title": "Perhitungan genealogi",
+      "detail": "Proporsi dihitung dari irisan waktu dan volume setiap transfer (FILLED_INTO). Ambang hold: lot dengan kontribusi RT-04 di atas 0% [asumsi QA]."
+    },
+    {
+      "id": "FARM-B",
+      "time": "13 Okt 05.10",
+      "title": "Farm Ngadirejo",
+      "detail": "Pemasok RT-04. Riwayat 30 hari: tidak ada temuan antibiotik.",
+      "node": "farm-b"
+    },
+    {
+      "id": "CIP-LOG",
+      "time": "14.10",
+      "title": "Log CIP Bay 2",
+      "detail": "Siklus CIP Bay 2 berjalan, alkali 14.10 - 14.45, asam 14.45 - 15.05, bilas 15.05 - 15.20.",
+      "node": "cip-b2"
+    },
+    {
+      "id": "TR-ST4",
+      "time": "13 Okt 11.30",
+      "title": "Serah-terima SP-1 ke transfer tank ST-4",
+      "detail": "Susu terstandar dari SP-1 masuk ST-4 10.40 - 11.30, 36.600 L, dicatat sebagai batch STB-1013-04. Sebelumnya serah-terima ini hanya ada di catatan operator; MilkGraph menghubungkannya dari irisan waktu flowmeter SP-1 dan kenaikan level ST-4. Cream ke CT-1."
+    },
+    {
+      "id": "TR-MIX",
+      "time": "13 Okt 12.30",
+      "title": "Mixing MX-2 batch MXB-1013-07",
+      "detail": "ST-4 (STB-1013-04) dan Premix PM-3 cokelat dicampur di MX-2 11.40 - 12.30, 40.200 L. Batch record MES dicocokkan dengan turunnya level ST-4."
+    },
+    {
+      "id": "FILL-F4",
+      "time": "14.42",
+      "title": "Jadwal Filling F4",
+      "detail": "F4 mengisi UHT Stroberi Kids 105 ml (Small Pack) dari Aseptic Tank AT-2, berbagi tangki dan produk dengan F2 (Stroberi 200 ml). Pada 13 Okt 13.10 - 21.30 F4 ganti format dan tidak mengisi."
+    },
+    {
+      "id": "SJ-NGD",
+      "time": "13 Okt 05.40",
+      "title": "Surat jalan SJ-NGD-1013-04",
+      "detail": "Farm Ngadirejo, RT-04, 8.800 L, suhu muat 3,6 °C, berangkat 04.30. Dicocokkan dengan tiket weighbridge saat tiba."
+    }
+  ],
+  "answers": [
+    {
+      "id": "backward",
+      "question": "Lot FG-1013-07 berasal dari RT dan farm mana?",
+      "template": "trace_backward",
+      "params": "lot_id = FG-1013-07",
+      "title": "FG-1013-07 berasal dari 4 RT di RMT-2",
+      "conclusion": "Lot ini mengandung 12% susu dari RT-04 (Farm Ngadirejo). Hasil lab RT-04 saat penerimaan lolos, tetapi mendekati batas deteksi antibiotik.",
+      "factors": [
+        {
+          "title": "Hasil QC FG out-of-spec",
+          "text": "Residu antibiotik beta-laktam positif pada FG-1013-07, 13 Okt 22.40.",
+          "source": "LAB-8812"
+        },
+        {
+          "title": "Jalur proses lot",
+          "text": "RMT-2 ke Thermal TH-1, Separator SP-1, transfer tank ST-4, Mixing MX-2 bersama Premix PM-3 (cokelat), Sterilisasi UHT-2, lalu Aseptic Tank AT-2. Serah-terima batch di ST-4 tercatat sebagai STB-1013-04.",
+          "source": "TR-PROC"
+        },
+        {
+          "title": "Komposisi RMT-2 saat lot diproses",
+          "text": "RT-02 31%, RT-04 12%, RT-06 27%, RT-09 30% dari volume yang masuk lot ini.",
+          "source": "TR-RMT2"
+        },
+        {
+          "title": "Kandidat sumber: RT-04",
+          "text": "Screening antibiotik RT-04 lolos dengan nilai mendekati batas deteksi.",
+          "source": "LAB-4471"
+        }
+      ],
+      "nodes": [
+        "lab-8812",
+        "fg-07",
+        "f2",
+        "at-2",
+        "rmt-2",
+        "rt-02",
+        "rt-04",
+        "rt-06",
+        "rt-09",
+        "farm-b",
+        "lab-4471",
+        "th-1",
+        "sp-1",
+        "st-4",
+        "mx-2",
+        "pm-3",
+        "uht-1"
+      ],
+      "edges": [
+        "e-lab8812",
+        "e-f2-fg07",
+        "e-at2-f2",
+        "e-uht-at2",
+        "e-rt02",
+        "e-rt04",
+        "e-rt06",
+        "e-rt09",
+        "e-farmb",
+        "e-lab4471",
+        "e-rmt-th",
+        "e-th-sp",
+        "e-sp-st",
+        "e-st-mx",
+        "e-pm-mx",
+        "e-mx-uht"
+      ],
+      "note": "Kandidat sumber berdasarkan genealogi volume, bukan kesimpulan penyebab. QA perlu uji ulang sampel retensi RT-04.",
+      "mix": [
+        {
+          "id": "RT-04",
+          "percent": 12
+        },
+        {
+          "id": "RT-02",
+          "percent": 31
+        },
+        {
+          "id": "RT-06",
+          "percent": 27
+        },
+        {
+          "id": "RT-09",
+          "percent": 30
+        }
+      ]
+    },
+    {
+      "id": "forward",
+      "question": "Lot apa saja yang mengandung susu RT-04?",
+      "template": "trace_forward",
+      "params": "rt_id = RT-04, tanggal = 13 Okt",
+      "title": "Susu RT-04 masuk ke 5 lot barang jadi",
+      "conclusion": "Daftar hold cukup 5 lot (36.100 pak), bukan seluruh 14 lot dari RMT-2 pada 13 Okt.",
+      "factors": [
+        {
+          "title": "RT-04 masuk RMT-2",
+          "text": "8.800 L, 06.20 - 06.48, bersama tiga RT lain.",
+          "source": "TR-RMT2"
+        },
+        {
+          "title": "Proses lanjutan",
+          "text": "RMT-2 ke Thermal TH-1, Separator SP-1, transfer tank ST-4, Mixing MX-2 bersama Premix PM-3 (cokelat), Sterilisasi UHT-2, lalu Aseptic Tank AT-2. Serah-terima batch di ST-4 tercatat sebagai STB-1013-04.",
+          "source": "TR-PROC"
+        },
+        {
+          "title": "F4 berbagi AT-2",
+          "text": "AT-2 melayani dua lini filling, F2 dan F4. Pada 13 Okt 13.10 - 21.30 F4 sedang ganti format dan tidak mengisi dari AT-2, sehingga tidak ada lot F4 yang terdampak.",
+          "source": "FILL-F4"
+        },
+        {
+          "title": "Lot terdampak di Filling F2",
+          "text": "Lima lot UHT 200 ml antara 13.10 dan 21.30 mengandung susu RT-04 dengan proporsi 3% - 12%.",
+          "source": "TR-FILL"
+        },
+        {
+          "title": "Ambang hold",
+          "text": "Semua lot dengan kontribusi RT-04 di atas 0% masuk daftar hold [asumsi QA].",
+          "source": "GEN-01"
+        }
+      ],
+      "nodes": [
+        "farm-b",
+        "rt-04",
+        "rmt-2",
+        "at-2",
+        "f2",
+        "fg-05",
+        "fg-06",
+        "fg-07",
+        "fg-08",
+        "fg-09",
+        "th-1",
+        "sp-1",
+        "st-4",
+        "mx-2",
+        "pm-3",
+        "uht-1",
+        "f4"
+      ],
+      "edges": [
+        "e-farmb",
+        "e-rt04",
+        "e-uht-at2",
+        "e-at2-f2",
+        "e-f2-fg05",
+        "e-f2-fg06",
+        "e-f2-fg07",
+        "e-f2-fg08",
+        "e-f2-fg09",
+        "e-rmt-th",
+        "e-th-sp",
+        "e-sp-st",
+        "e-st-mx",
+        "e-pm-mx",
+        "e-mx-uht",
+        "e-at2-f4"
+      ],
+      "note": "Daftar hold diajukan ke QA. Sistem tidak menahan atau menarik produk secara otomatis.",
+      "lots": [
+        {
+          "id": "FG-1013-05",
+          "product": "UHT Cokelat 200 ml",
+          "percent": 6,
+          "packs": 7200
+        },
+        {
+          "id": "FG-1013-06",
+          "product": "UHT Cokelat 200 ml",
+          "percent": 11,
+          "packs": 7400
+        },
+        {
+          "id": "FG-1013-07",
+          "product": "UHT Cokelat 200 ml",
+          "percent": 12,
+          "packs": 7300
+        },
+        {
+          "id": "FG-1013-08",
+          "product": "UHT Cokelat 200 ml",
+          "percent": 9,
+          "packs": 7100
+        },
+        {
+          "id": "FG-1013-09",
+          "product": "UHT Cokelat 200 ml",
+          "percent": 3,
+          "packs": 7100
+        }
+      ]
+    },
+    {
+      "id": "bay2",
+      "question": "Kenapa Bay 2 tidak bisa dipakai pukul 14.50?",
+      "template": "explain_resource",
+      "params": "resource = Bay 2, waktu = 14.50",
+      "title": "Bay 2 sedang CIP sampai 15.20",
+      "conclusion": "CIP Bay 2 mulai 14.10 dengan durasi standar 70 menit. Rencana FIFO menjadwalkan RT-26 di Bay 2 pukul 14.50, sehingga rencana ditandai tidak layak.",
+      "factors": [
+        {
+          "title": "CIPEvent Bay 2",
+          "text": "Alkali 14.10 - 14.45, asam 14.45 - 15.05, bilas 15.05 - 15.20.",
+          "source": "CIP-LOG"
+        },
+        {
+          "title": "Rencana yang bentrok",
+          "text": "RT-26 dijadwalkan bongkar di Bay 2 pukul 14.50.",
+          "source": "PLAN-FIFO"
+        },
+        {
+          "title": "Dampak ke holding time",
+          "text": "Jika RT-26 menunggu Bay 2, bongkar selesai 16.15 dan melewati batas 10j 30m [asumsi].",
+          "source": "HOLD-RT26"
+        }
+      ],
+      "nodes": [
+        "rt-26",
+        "bay-2",
+        "cip-b2",
+        "lab-gate"
+      ],
+      "edges": [
+        "e-rt26-bay2",
+        "e-cip-bay2",
+        "e-lab-rt26"
+      ],
+      "note": "Rekomendasi penyusunan ulang ada di halaman Rencana & What-if dan menunggu persetujuan planner."
+    }
+  ],
+  "plans": [
+    {
+      "id": "current",
+      "label": "Rencana shift (FIFO)",
+      "detail": "Rencana awal berbasis urutan rilis lab, diuji terhadap 6 constraint.",
+      "solveTime": "3,8 detik",
+      "turnaround": [
+        "3j 12m",
+        "2j 41m"
+      ],
+      "queue": [
+        5,
+        2
+      ],
+      "before": [
+        {
+          "resource": "Lab test",
+          "label": "RT-23",
+          "start": 0,
+          "end": 30,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-25",
+          "start": 30,
+          "end": 60,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-26",
+          "start": 60,
+          "end": 78,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-27",
+          "start": 78,
+          "end": 108,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-24",
+          "start": 108,
+          "end": 150,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-28",
+          "start": 150,
+          "end": 180,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-29",
+          "start": 180,
+          "end": 210,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-30",
+          "start": 210,
+          "end": 240,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-21",
+          "start": 0,
+          "end": 35,
+          "type": "unload",
+          "source": "WB-21"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-23",
+          "start": 85,
+          "end": 135,
+          "type": "unload",
+          "source": "WB-23"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-20",
+          "start": 0,
+          "end": 40,
+          "type": "unload",
+          "source": "WB-20"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-22",
+          "start": 0,
+          "end": 45,
+          "type": "unload",
+          "source": "WB-22"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-25",
+          "start": 70,
+          "end": 120,
+          "type": "unload",
+          "source": "WB-25"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "CIP Bay 2",
+          "start": 70,
+          "end": 140,
+          "type": "cip",
+          "source": "CIP-B2"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-26 bentrok CIP",
+          "start": 110,
+          "end": 150,
+          "type": "violation",
+          "source": "PLAN-FIFO"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-27",
+          "start": 150,
+          "end": 185,
+          "type": "unload",
+          "source": "WB-27"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-30",
+          "start": 245,
+          "end": 280,
+          "type": "unload",
+          "source": "WB-30"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-24",
+          "start": 160,
+          "end": 195,
+          "type": "unload",
+          "source": "WB-24"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-29",
+          "start": 215,
+          "end": 250,
+          "type": "unload",
+          "source": "WB-29"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-28",
+          "start": 185,
+          "end": 220,
+          "type": "unload",
+          "source": "WB-28"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Full Cream 1 L",
+          "start": 0,
+          "end": 180,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "Changeover size",
+          "start": 180,
+          "end": 215,
+          "type": "changeover",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Cokelat 200 ml",
+          "start": 215,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "UHT Stroberi 200 ml",
+          "start": 0,
+          "end": 170,
+          "type": "process",
+          "source": "FILL-F2"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "Starvation",
+          "start": 170,
+          "end": 215,
+          "type": "starvation",
+          "source": "FLOW-F2"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "UHT Stroberi 200 ml",
+          "start": 215,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F2"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "UHT Stroberi Kids 105 ml",
+          "start": 0,
+          "end": 170,
+          "type": "process",
+          "source": "FILL-F4"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "Starvation",
+          "start": 170,
+          "end": 215,
+          "type": "starvation",
+          "source": "FLOW-F2"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "UHT Stroberi Kids 105 ml",
+          "start": 215,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F4"
+        }
+      ],
+      "after": [
+        {
+          "resource": "Lab test",
+          "label": "RT-23",
+          "start": 0,
+          "end": 30,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-25",
+          "start": 30,
+          "end": 60,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-26",
+          "start": 60,
+          "end": 78,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-27",
+          "start": 78,
+          "end": 108,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-24",
+          "start": 108,
+          "end": 150,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-28",
+          "start": 150,
+          "end": 180,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-29",
+          "start": 180,
+          "end": 210,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-30",
+          "start": 210,
+          "end": 240,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-21",
+          "start": 0,
+          "end": 35,
+          "type": "unload",
+          "source": "WB-21"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-23",
+          "start": 85,
+          "end": 135,
+          "type": "unload",
+          "source": "WB-23"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-20",
+          "start": 0,
+          "end": 40,
+          "type": "unload",
+          "source": "WB-20"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-22",
+          "start": 0,
+          "end": 45,
+          "type": "unload",
+          "source": "WB-22"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-25",
+          "start": 70,
+          "end": 120,
+          "type": "unload",
+          "source": "WB-25"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "CIP Bay 2",
+          "start": 70,
+          "end": 140,
+          "type": "cip",
+          "source": "CIP-B2"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-26",
+          "start": 135,
+          "end": 170,
+          "type": "unload",
+          "source": "WB-26"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-28",
+          "start": 185,
+          "end": 220,
+          "type": "unload",
+          "source": "WB-28"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-27",
+          "start": 140,
+          "end": 175,
+          "type": "unload",
+          "source": "WB-27"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-30",
+          "start": 245,
+          "end": 280,
+          "type": "unload",
+          "source": "WB-30"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-24",
+          "start": 150,
+          "end": 185,
+          "type": "unload",
+          "source": "WB-24"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-29",
+          "start": 215,
+          "end": 250,
+          "type": "unload",
+          "source": "WB-29"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Full Cream 1 L",
+          "start": 0,
+          "end": 180,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "Changeover size",
+          "start": 180,
+          "end": 215,
+          "type": "changeover",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Cokelat 200 ml",
+          "start": 215,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "UHT Stroberi 200 ml",
+          "start": 0,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F2"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "UHT Stroberi Kids 105 ml",
+          "start": 0,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F4"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "flow",
+          "label": "Flow rate",
+          "before": {
+            "ok": false,
+            "text": "Pasokan ke Filling F2 terputus 45 menit mulai 15.50."
+          },
+          "after": {
+            "ok": true,
+            "text": "Pasokan F2 terjaga."
+          },
+          "source": "FLOW-F2"
+        },
+        {
+          "id": "maintenance",
+          "label": "Ketersediaan & maintenance",
+          "before": {
+            "ok": true,
+            "text": "Tidak ada maintenance window di horizon ini."
+          },
+          "after": {
+            "ok": true,
+            "text": "Tidak ada maintenance window di horizon ini."
+          },
+          "source": "MAINT-01"
+        },
+        {
+          "id": "holding",
+          "label": "Holding time",
+          "before": {
+            "ok": false,
+            "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52."
+          },
+          "after": {
+            "ok": true,
+            "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas."
+          },
+          "source": "HOLD-RT26"
+        },
+        {
+          "id": "cip",
+          "label": "Downtime & CIP",
+          "before": {
+            "ok": false,
+            "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+          },
+          "after": {
+            "ok": true,
+            "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+          },
+          "source": "CIP-B2"
+        },
+        {
+          "id": "tank",
+          "label": "Kapasitas tangki",
+          "before": {
+            "ok": true,
+            "text": "Raw Milk Buffer maksimum 91% dari kapasitas."
+          },
+          "after": {
+            "ok": true,
+            "text": "Raw Milk Buffer maksimum 94% dari kapasitas."
+          },
+          "source": "RMT-LEVEL"
+        },
+        {
+          "id": "changeover",
+          "label": "Changeover paper/size/flavor",
+          "before": {
+            "ok": true,
+            "text": "Satu changeover size di F1 pukul 16.00, sesuai matriks."
+          },
+          "after": {
+            "ok": true,
+            "text": "Satu changeover size di F1 pukul 16.00, sesuai matriks."
+          },
+          "source": "FILL-F1"
+        }
+      ],
+      "reasons": [
+        {
+          "title": "RT-26 dipindah dari Bay 2 ke Bay 1, mulai 15.15",
+          "text": "Bay 2 masih CIP sampai 15.20. Bay 1 kosong setelah RT-23 selesai 15.15, dan RT-26 selesai sebelum batas holding time.",
+          "source": "CIP-B2"
+        },
+        {
+          "title": "RT-24 didahulukan ke Bay 3 setelah rilis lab 15.30",
+          "text": "Umur susu RT-24 paling tinggi di antrean berikutnya. Bay 3 kosong sejak 15.00.",
+          "source": "HOLD-RT24"
+        },
+        {
+          "title": "RT-27 masuk Bay 2 tepat setelah CIP selesai",
+          "text": "Pasokan Raw Milk Buffer RMT-2 terjaga, sehingga Filling F2 tidak berhenti pukul 15.50.",
+          "source": "FLOW-F2"
+        }
+      ]
+    },
+    {
+      "id": "cip-molor",
+      "label": "What-if: CIP Bay 2 molor 40 menit",
+      "detail": "Skenario: CIP Bay 2 selesai 16.00, bukan 15.20.",
+      "solveTime": "4,6 detik",
+      "turnaround": [
+        "3j 30m",
+        "2j 52m"
+      ],
+      "queue": [
+        6,
+        2
+      ],
+      "before": [
+        {
+          "resource": "Lab test",
+          "label": "RT-23",
+          "start": 0,
+          "end": 30,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-25",
+          "start": 30,
+          "end": 60,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-26",
+          "start": 60,
+          "end": 78,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-27",
+          "start": 78,
+          "end": 108,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-24",
+          "start": 108,
+          "end": 150,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-28",
+          "start": 150,
+          "end": 180,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-29",
+          "start": 180,
+          "end": 210,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-30",
+          "start": 210,
+          "end": 240,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-21",
+          "start": 0,
+          "end": 35,
+          "type": "unload",
+          "source": "WB-21"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-23",
+          "start": 85,
+          "end": 135,
+          "type": "unload",
+          "source": "WB-23"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-20",
+          "start": 0,
+          "end": 40,
+          "type": "unload",
+          "source": "WB-20"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-22",
+          "start": 0,
+          "end": 45,
+          "type": "unload",
+          "source": "WB-22"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-25",
+          "start": 70,
+          "end": 120,
+          "type": "unload",
+          "source": "WB-25"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "CIP Bay 2 (molor)",
+          "start": 70,
+          "end": 180,
+          "type": "cip",
+          "source": "CIP-B2"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-26 bentrok CIP",
+          "start": 110,
+          "end": 150,
+          "type": "violation",
+          "source": "PLAN-FIFO"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-27 bentrok CIP",
+          "start": 150,
+          "end": 185,
+          "type": "violation",
+          "source": "PLAN-FIFO"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-30",
+          "start": 245,
+          "end": 280,
+          "type": "unload",
+          "source": "WB-30"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-24",
+          "start": 160,
+          "end": 195,
+          "type": "unload",
+          "source": "WB-24"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-29",
+          "start": 215,
+          "end": 250,
+          "type": "unload",
+          "source": "WB-29"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-28",
+          "start": 185,
+          "end": 220,
+          "type": "unload",
+          "source": "WB-28"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Full Cream 1 L",
+          "start": 0,
+          "end": 180,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "Changeover size",
+          "start": 180,
+          "end": 215,
+          "type": "changeover",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Cokelat 200 ml",
+          "start": 215,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "UHT Stroberi 200 ml",
+          "start": 0,
+          "end": 170,
+          "type": "process",
+          "source": "FILL-F2"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "Starvation",
+          "start": 170,
+          "end": 245,
+          "type": "starvation",
+          "source": "FLOW-F2"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "UHT Stroberi 200 ml",
+          "start": 245,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F2"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "UHT Stroberi Kids 105 ml",
+          "start": 0,
+          "end": 170,
+          "type": "process",
+          "source": "FILL-F4"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "Starvation",
+          "start": 170,
+          "end": 245,
+          "type": "starvation",
+          "source": "FLOW-F2"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "UHT Stroberi Kids 105 ml",
+          "start": 245,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F4"
+        }
+      ],
+      "after": [
+        {
+          "resource": "Lab test",
+          "label": "RT-23",
+          "start": 0,
+          "end": 30,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-25",
+          "start": 30,
+          "end": 60,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-26",
+          "start": 60,
+          "end": 78,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-27",
+          "start": 78,
+          "end": 108,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-24",
+          "start": 108,
+          "end": 150,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-28",
+          "start": 150,
+          "end": 180,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-29",
+          "start": 180,
+          "end": 210,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Lab test",
+          "label": "RT-30",
+          "start": 210,
+          "end": 240,
+          "type": "lab",
+          "source": "LAB-QUEUE"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-21",
+          "start": 0,
+          "end": 35,
+          "type": "unload",
+          "source": "WB-21"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-23",
+          "start": 85,
+          "end": 135,
+          "type": "unload",
+          "source": "WB-23"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-20",
+          "start": 0,
+          "end": 40,
+          "type": "unload",
+          "source": "WB-20"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-22",
+          "start": 0,
+          "end": 45,
+          "type": "unload",
+          "source": "WB-22"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-25",
+          "start": 70,
+          "end": 120,
+          "type": "unload",
+          "source": "WB-25"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "CIP Bay 2 (molor)",
+          "start": 70,
+          "end": 180,
+          "type": "cip",
+          "source": "CIP-B2"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-26",
+          "start": 135,
+          "end": 170,
+          "type": "unload",
+          "source": "WB-26"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-28",
+          "start": 180,
+          "end": 215,
+          "type": "unload",
+          "source": "WB-28"
+        },
+        {
+          "resource": "Bay 1",
+          "label": "RT-29",
+          "start": 215,
+          "end": 250,
+          "type": "unload",
+          "source": "WB-29"
+        },
+        {
+          "resource": "Bay 2",
+          "label": "RT-30",
+          "start": 245,
+          "end": 280,
+          "type": "unload",
+          "source": "WB-30"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-24",
+          "start": 150,
+          "end": 185,
+          "type": "unload",
+          "source": "WB-24"
+        },
+        {
+          "resource": "Bay 3",
+          "label": "RT-27",
+          "start": 185,
+          "end": 220,
+          "type": "unload",
+          "source": "WB-27"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Full Cream 1 L",
+          "start": 0,
+          "end": 180,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "Changeover size",
+          "start": 180,
+          "end": 215,
+          "type": "changeover",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F1",
+          "label": "UHT Cokelat 200 ml",
+          "start": 215,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F1"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "UHT Stroberi 200 ml",
+          "start": 0,
+          "end": 185,
+          "type": "process",
+          "source": "FILL-F2"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "Starvation",
+          "start": 185,
+          "end": 200,
+          "type": "starvation",
+          "source": "FLOW-F2"
+        },
+        {
+          "resource": "Filling F2",
+          "label": "UHT Stroberi 200 ml",
+          "start": 200,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F2"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "UHT Stroberi Kids 105 ml",
+          "start": 0,
+          "end": 185,
+          "type": "process",
+          "source": "FILL-F4"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "Starvation",
+          "start": 185,
+          "end": 200,
+          "type": "starvation",
+          "source": "FLOW-F2"
+        },
+        {
+          "resource": "Filling F4",
+          "label": "UHT Stroberi Kids 105 ml",
+          "start": 200,
+          "end": 420,
+          "type": "process",
+          "source": "FILL-F4"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "flow",
+          "label": "Flow rate",
+          "before": {
+            "ok": false,
+            "text": "Pasokan ke Filling F2 terputus 75 menit mulai 15.50."
+          },
+          "after": {
+            "ok": true,
+            "text": "Jeda F2 15 menit, dalam toleransi 20 menit [asumsi]."
+          },
+          "source": "FLOW-F2"
+        },
+        {
+          "id": "maintenance",
+          "label": "Ketersediaan & maintenance",
+          "before": {
+            "ok": true,
+            "text": "Tidak ada maintenance window di horizon ini."
+          },
+          "after": {
+            "ok": true,
+            "text": "Tidak ada maintenance window di horizon ini."
+          },
+          "source": "MAINT-01"
+        },
+        {
+          "id": "holding",
+          "label": "Holding time",
+          "before": {
+            "ok": false,
+            "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52."
+          },
+          "after": {
+            "ok": true,
+            "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas."
+          },
+          "source": "HOLD-RT26"
+        },
+        {
+          "id": "cip",
+          "label": "Downtime & CIP",
+          "before": {
+            "ok": false,
+            "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00."
+          },
+          "after": {
+            "ok": true,
+            "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+          },
+          "source": "CIP-B2"
+        },
+        {
+          "id": "tank",
+          "label": "Kapasitas tangki",
+          "before": {
+            "ok": true,
+            "text": "Raw Milk Buffer maksimum 91% dari kapasitas."
+          },
+          "after": {
+            "ok": true,
+            "text": "Raw Milk Buffer maksimum 94% dari kapasitas."
+          },
+          "source": "RMT-LEVEL"
+        },
+        {
+          "id": "changeover",
+          "label": "Changeover paper/size/flavor",
+          "before": {
+            "ok": true,
+            "text": "Satu changeover size di F1 pukul 16.00, sesuai matriks."
+          },
+          "after": {
+            "ok": true,
+            "text": "Satu changeover size di F1 pukul 16.00, sesuai matriks."
+          },
+          "source": "FILL-F1"
+        }
+      ],
+      "reasons": [
+        {
+          "title": "Bay 2 dikeluarkan dari antrean sampai 16.00",
+          "text": "RT-26 ke Bay 1 pukul 15.15, RT-27 ke Bay 3 pukul 16.05.",
+          "source": "CIP-B2"
+        },
+        {
+          "title": "RT-28 dipindah ke Bay 1 pukul 16.00",
+          "text": "Bay 1 kosong setelah RT-26. Bay 3 tetap untuk RT-24 dan RT-27.",
+          "source": "WB-28"
+        },
+        {
+          "title": "Jeda Filling F2 tersisa 15 menit",
+          "text": "Masih dalam toleransi 20 menit [asumsi]. Tanpa penyusunan ulang, jeda F2 menjadi 75 menit.",
+          "source": "FLOW-F2"
+        }
+      ]
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "farm-a",
+        "type": "Farm",
+        "label": "Farm Sumberejo",
+        "rank": 0,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "farm-b",
+        "type": "Farm",
+        "label": "Farm Ngadirejo",
+        "rank": 0,
+        "source": "FARM-B"
+      },
+      {
+        "id": "farm-c",
+        "type": "Farm",
+        "label": "KUD Ngantang",
+        "rank": 0,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "farm-d",
+        "type": "Farm",
+        "label": "Farm Tutur",
+        "rank": 0,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "lab-4471",
+        "type": "LabResult",
+        "label": "LAB-4471",
+        "rank": 0,
+        "source": "LAB-4471"
+      },
+      {
+        "id": "rt-02",
+        "type": "RT",
+        "label": "RT-02",
+        "rank": 1,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "rt-04",
+        "type": "RT",
+        "label": "RT-04",
+        "rank": 1,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "rt-06",
+        "type": "RT",
+        "label": "RT-06",
+        "rank": 1,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "rt-09",
+        "type": "RT",
+        "label": "RT-09",
+        "rank": 1,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "rmt-2",
+        "type": "Buffer",
+        "label": "RMT-2",
+        "rank": 2,
+        "source": "TR-RMT2"
+      },
+      {
+        "id": "th-1",
+        "type": "Thermal",
+        "label": "TH-1",
+        "rank": 3,
+        "source": "TR-PROC"
+      },
+      {
+        "id": "sp-1",
+        "type": "Separator",
+        "label": "SP-1",
+        "rank": 4,
+        "source": "TR-PROC"
+      },
+      {
+        "id": "pm-3",
+        "type": "Premix",
+        "label": "PM-3",
+        "rank": 5,
+        "source": "TR-PROC"
+      },
+      {
+        "id": "uht-1",
+        "type": "Sterilisasi",
+        "label": "UHT-2",
+        "rank": 7,
+        "source": "TR-PROC"
+      },
+      {
+        "id": "at-2",
+        "type": "Aseptic",
+        "label": "AT-2",
+        "rank": 8,
+        "source": "TR-PROC"
+      },
+      {
+        "id": "f2",
+        "type": "Filling",
+        "label": "F2",
+        "rank": 9,
+        "source": "TR-FILL"
+      },
+      {
+        "id": "fg-05",
+        "type": "Lot",
+        "label": "FG-1013-05",
+        "rank": 10,
+        "source": "TR-FILL"
+      },
+      {
+        "id": "fg-06",
+        "type": "Lot",
+        "label": "FG-1013-06",
+        "rank": 10,
+        "source": "TR-FILL"
+      },
+      {
+        "id": "fg-07",
+        "type": "Lot",
+        "label": "FG-1013-07",
+        "rank": 10,
+        "source": "LAB-8812"
+      },
+      {
+        "id": "fg-08",
+        "type": "Lot",
+        "label": "FG-1013-08",
+        "rank": 10,
+        "source": "TR-FILL"
+      },
+      {
+        "id": "fg-09",
+        "type": "Lot",
+        "label": "FG-1013-09",
+        "rank": 10,
+        "source": "TR-FILL"
+      },
+      {
+        "id": "lab-8812",
+        "type": "LabResult",
+        "label": "LAB-8812",
+        "rank": 11,
+        "source": "LAB-8812"
+      },
+      {
+        "id": "lab-gate",
+        "type": "LabResult",
+        "label": "Antrean lab",
+        "rank": 0,
+        "source": "LAB-QUEUE"
+      },
+      {
+        "id": "rt-26",
+        "type": "RT",
+        "label": "RT-26",
+        "rank": 1,
+        "source": "WB-26"
+      },
+      {
+        "id": "bay-2",
+        "type": "Bay",
+        "label": "Bay 2",
+        "rank": 2,
+        "source": "BAY-STAT"
+      },
+      {
+        "id": "cip-b2",
+        "type": "CIPEvent",
+        "label": "CIP-B2-1014",
+        "rank": 2,
+        "source": "CIP-LOG"
+      },
+      {
+        "id": "st-4",
+        "type": "Storage",
+        "label": "ST-4",
+        "rank": 5,
+        "source": "TR-ST4"
+      },
+      {
+        "id": "ct-1",
+        "type": "Cream",
+        "label": "CT-1",
+        "rank": 5,
+        "source": "TR-ST4"
+      },
+      {
+        "id": "mx-2",
+        "type": "Mixing",
+        "label": "MX-2",
+        "rank": 6,
+        "source": "TR-MIX"
+      },
+      {
+        "id": "f4",
+        "type": "Filling",
+        "label": "F4",
+        "rank": 9,
+        "source": "FILL-F4"
+      }
+    ],
+    "edges": [
+      {
+        "id": "e-farma",
+        "source": "farm-a",
+        "target": "rt-02",
+        "label": "COLLECTED"
+      },
+      {
+        "id": "e-farmb",
+        "source": "farm-b",
+        "target": "rt-04",
+        "label": "COLLECTED"
+      },
+      {
+        "id": "e-farmc",
+        "source": "farm-c",
+        "target": "rt-06",
+        "label": "COLLECTED"
+      },
+      {
+        "id": "e-farmd",
+        "source": "farm-d",
+        "target": "rt-09",
+        "label": "COLLECTED"
+      },
+      {
+        "id": "e-lab4471",
+        "source": "lab-4471",
+        "target": "rt-04",
+        "label": "TESTED"
+      },
+      {
+        "id": "e-rt02",
+        "source": "rt-02",
+        "target": "rmt-2",
+        "label": "FILLED_INTO 10.400 L"
+      },
+      {
+        "id": "e-rt04",
+        "source": "rt-04",
+        "target": "rmt-2",
+        "label": "FILLED_INTO 8.800 L"
+      },
+      {
+        "id": "e-rt06",
+        "source": "rt-06",
+        "target": "rmt-2",
+        "label": "FILLED_INTO 9.900 L"
+      },
+      {
+        "id": "e-rt09",
+        "source": "rt-09",
+        "target": "rmt-2",
+        "label": "FILLED_INTO 10.100 L"
+      },
+      {
+        "id": "e-rmt-th",
+        "source": "rmt-2",
+        "target": "th-1",
+        "label": "TRANSFER RMB-1013-02"
+      },
+      {
+        "id": "e-th-sp",
+        "source": "th-1",
+        "target": "sp-1",
+        "label": "TRANSFER"
+      },
+      {
+        "id": "e-sp-st",
+        "source": "sp-1",
+        "target": "st-4",
+        "label": "HANDOFF STB-1013-04"
+      },
+      {
+        "id": "e-sp-ct",
+        "source": "sp-1",
+        "target": "ct-1",
+        "label": "CREAM"
+      },
+      {
+        "id": "e-st-mx",
+        "source": "st-4",
+        "target": "mx-2",
+        "label": "HANDOFF MXB-1013-07"
+      },
+      {
+        "id": "e-pm-mx",
+        "source": "pm-3",
+        "target": "mx-2",
+        "label": "PREMIX cokelat"
+      },
+      {
+        "id": "e-mx-uht",
+        "source": "mx-2",
+        "target": "uht-1",
+        "label": "TRANSFER"
+      },
+      {
+        "id": "e-uht-at2",
+        "source": "uht-1",
+        "target": "at-2",
+        "label": "TRANSFER"
+      },
+      {
+        "id": "e-at2-f2",
+        "source": "at-2",
+        "target": "f2",
+        "label": "TRANSFER"
+      },
+      {
+        "id": "e-at2-f4",
+        "source": "at-2",
+        "target": "f4",
+        "label": "TIDAK MENGISI 13 Okt"
+      },
+      {
+        "id": "e-f2-fg05",
+        "source": "f2",
+        "target": "fg-05",
+        "label": "FILLED 6%"
+      },
+      {
+        "id": "e-f2-fg06",
+        "source": "f2",
+        "target": "fg-06",
+        "label": "FILLED 11%"
+      },
+      {
+        "id": "e-f2-fg07",
+        "source": "f2",
+        "target": "fg-07",
+        "label": "FILLED 12%"
+      },
+      {
+        "id": "e-f2-fg08",
+        "source": "f2",
+        "target": "fg-08",
+        "label": "FILLED 9%"
+      },
+      {
+        "id": "e-f2-fg09",
+        "source": "f2",
+        "target": "fg-09",
+        "label": "FILLED 3%"
+      },
+      {
+        "id": "e-lab8812",
+        "source": "lab-8812",
+        "target": "fg-07",
+        "label": "TESTED"
+      },
+      {
+        "id": "e-lab-rt26",
+        "source": "lab-gate",
+        "target": "rt-26",
+        "label": "RELEASED 14.18"
+      },
+      {
+        "id": "e-rt26-bay2",
+        "source": "rt-26",
+        "target": "bay-2",
+        "label": "PLANNED 14.50",
+        "planned": true
+      },
+      {
+        "id": "e-cip-bay2",
+        "source": "cip-b2",
+        "target": "bay-2",
+        "label": "OCCUPIES 14.10 - 15.20"
+      }
+    ]
+  },
+  "handoffs": [
+    {
+      "step": "Farm ke RT",
+      "from": "Farm Ngadirejo",
+      "to": "RT-04",
+      "batch": "SJ-NGD-1013-04",
+      "kind": "Surat jalan",
+      "window": "13 Okt 04.30 - 05.40",
+      "volume": "8.800 L",
+      "record": "Surat jalan + tiket weighbridge",
+      "source": "FARM-B",
+      "gap": false
+    },
+    {
+      "step": "Receiving",
+      "from": "RT-04",
+      "to": "RMT-2",
+      "batch": "RMB-1013-02",
+      "kind": "Raw milk batch",
+      "window": "13 Okt 06.20 - 06.45",
+      "volume": "8.800 L dari 39.200 L",
+      "record": "Flowmeter bay + level RMT-2",
+      "source": "TR-RMT2",
+      "gap": false
+    },
+    {
+      "step": "Pre-processing",
+      "from": "RMT-2",
+      "to": "TH-1, SP-1",
+      "batch": "RMB-1013-02",
+      "kind": "Raw milk batch",
+      "window": "13 Okt 08.15 - 10.40",
+      "volume": "37.900 L",
+      "record": "Historian SCADA",
+      "source": "TR-PROC",
+      "gap": false
+    },
+    {
+      "step": "Storage / transfer tank",
+      "from": "SP-1",
+      "to": "ST-4",
+      "batch": "STB-1013-04",
+      "kind": "Batch storage",
+      "window": "13 Okt 10.40 - 11.30",
+      "volume": "36.600 L",
+      "record": "Irisan waktu flowmeter SP-1 dan kenaikan level ST-4",
+      "source": "TR-ST4",
+      "gap": true
+    },
+    {
+      "step": "Mixing",
+      "from": "ST-4 + PM-3",
+      "to": "MX-2",
+      "batch": "MXB-1013-07",
+      "kind": "Batch produk",
+      "window": "13 Okt 11.40 - 12.30",
+      "volume": "40.200 L",
+      "record": "Batch record MES + level ST-4 turun",
+      "source": "TR-MIX",
+      "gap": true
+    },
+    {
+      "step": "Sterilisasi dan aseptic",
+      "from": "MX-2",
+      "to": "UHT-2, AT-2",
+      "batch": "MXB-1013-07",
+      "kind": "Batch produk",
+      "window": "13 Okt 12.30 - 21.00",
+      "volume": "39.800 L",
+      "record": "Historian SCADA",
+      "source": "TR-PROC",
+      "gap": false
+    },
+    {
+      "step": "Filling",
+      "from": "AT-2",
+      "to": "F2",
+      "batch": "FG-1013-05 s.d. 09",
+      "kind": "Lot barang jadi",
+      "window": "13 Okt 13.10 - 21.30",
+      "volume": "5 lot, 36.100 pak",
+      "record": "MES filling",
+      "source": "TR-FILL",
+      "gap": false
+    }
+  ]
+}

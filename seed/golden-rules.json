@@ -1,0 +1,1650 @@
+{
+  "note": "Output lib/rules.ts. Backend /plans/{id}/check harus menghasilkan ok, text, dan violations yang identik untuk setiap kasus.",
+  "cases": [
+    {
+      "name": "default",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 0,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 0,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "holding-620",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 620,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 60,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 20m [asumsi] pukul 15.42. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 15.50, lewat batas 10j 20m [asumsi] pukul 15.42. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 20m [asumsi] pukul 15.42. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 15.50, lewat batas 10j 20m [asumsi] pukul 15.42. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "holding-660",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 660,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 100,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 16.15, sisa 7 menit sebelum batas 11j 00m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 2,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 32 menit sebelum batas 11j 00m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 0,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 16.15, sisa 7 menit sebelum batas 11j 00m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 2,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 32 menit sebelum batas 11j 00m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 0,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "starvation-tol-10",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 10,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 10 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 0,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 10 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer. Pasokan ke F2 dan F4 terputus 15 menit mulai 16.05, melebihi toleransi 10 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "cip-buffer-10",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 10,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20 + jeda 10 menit."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-27 dijadwalkan di Bay 2 15.20, padahal Bay 2 CIP sampai 15.20 + jeda 10 menit."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00 + jeda 10 menit. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00 + jeda 10 menit."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.10 (termasuk jeda)."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 0,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "tank-max-92",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 92,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 92%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": false,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 92%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 92%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": false,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 92%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "changeover-max-0",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 0
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": false,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 0 changeover per lini per shift."
+              }
+            },
+            "violations": 4,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": false,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 0 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": false,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 0 changeover per lini per shift."
+              }
+            },
+            "violations": 4,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": false,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 0 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "maintenance-bay3",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": true,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": false,
+                "text": "RT-28 bongkar saat maintenance Bay 3 16.00-16.30."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 4,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": false,
+                "text": "RT-24 bongkar saat maintenance Bay 3 16.00-16.30."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": false,
+                "text": "RT-28 bongkar saat maintenance Bay 3 16.00-16.30."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 4,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": false,
+                "text": "RT-24, RT-27 bongkar saat maintenance Bay 3 16.00-16.30."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "max-transfer-8400",
+      "limits": {
+        "maxTransfer": 8400,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 8.400 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 8.540 L/jam, melebihi batas transfer 8.400 L/jam."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 8.400 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 8.540 L/jam, melebihi batas transfer 8.400 L/jam. Pasokan ke F2 dan F4 terputus 15 menit mulai 16.05."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "buffer-max-900",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 900,
+        "cipBuffer": 0,
+        "breakdownF1": false,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 15j 00m, terlampaui."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 15j 00m, terlampaui."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 15j 00m, terlampaui."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 15j 00m, terlampaui."
+              },
+              "cip": {
+                "ok": true,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    },
+    {
+      "name": "breakdown-f1",
+      "limits": {
+        "maxTransfer": 9000,
+        "starvationTol": 20,
+        "maintenanceBay3": false,
+        "holdingMin": 630,
+        "bufferMaxMin": 1080,
+        "cipBuffer": 0,
+        "breakdownF1": true,
+        "tankMax": 95,
+        "changeoverMax": 2
+      },
+      "holdingLeft": 70,
+      "plans": [
+        {
+          "plan": "current",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 45 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 15.20. Breakdown F1 16.30-17.00 memotong Changeover size dan UHT Cokelat 200 ml; jadwal F1 perlu disusun ulang."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 45
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Pasokan F2 dan F4 terjaga."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 15.20. Breakdown F1 16.30-17.00 memotong Changeover size dan UHT Cokelat 200 ml; jadwal F1 perlu disusun ulang."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 0
+          }
+        },
+        {
+          "plan": "cip-molor",
+          "before": {
+            "checks": {
+              "flow": {
+                "ok": false,
+                "text": "Untuk mengisi AT-2 tepat waktu, UHT-2 harus mengejar 10.200 L/jam, melebihi batas transfer 9.000 L/jam. Pasokan ke F2 dan F4 terputus 75 menit mulai 15.50, melebihi toleransi 20 menit."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": false,
+                "text": "RT-26 baru selesai bongkar 16.15, lewat batas 10j 30m [asumsi] pukul 15.52. Susu tertua di RMT-2 masuk thermal pada umur 16j 10m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "RT-26 dijadwalkan di Bay 2 14.50, padahal Bay 2 CIP sampai 16.00. RT-27 dijadwalkan di Bay 2 15.30, padahal Bay 2 CIP sampai 16.00. Breakdown F1 16.30-17.00 memotong Changeover size dan UHT Cokelat 200 ml; jadwal F1 perlu disusun ulang."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 91% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 3,
+            "starvation": 75
+          },
+          "after": {
+            "checks": {
+              "flow": {
+                "ok": true,
+                "text": "UHT-2 ke AT-2 butuh 8.540 L/jam, dalam batas transfer 9.000 L/jam. Jeda F2 dan F4 15 menit, dalam toleransi 20 menit [asumsi]."
+              },
+              "maintenance": {
+                "ok": true,
+                "text": "Tidak ada maintenance window di horizon ini."
+              },
+              "holding": {
+                "ok": true,
+                "text": "RT-26 selesai bongkar 15.50, sisa 2 menit sebelum batas 10j 30m [asumsi]. Susu tertua di RMT-2 masuk thermal pada umur 15j 05m, batas 18j 00m."
+              },
+              "cip": {
+                "ok": false,
+                "text": "Tidak ada bongkar di Bay 2 sebelum CIP selesai 16.00. Breakdown F1 16.30-17.00 memotong Changeover size dan UHT Cokelat 200 ml; jadwal F1 perlu disusun ulang."
+              },
+              "tank": {
+                "ok": true,
+                "text": "Raw Milk Buffer maksimum 94% dari kapasitas, batas 95%. Transfer tank ST-4 siap menerima."
+              },
+              "changeover": {
+                "ok": true,
+                "text": "1 changeover di F1 pukul 16.00, 35 menit; memenuhi SOP 35 menit. Batas 2 changeover per lini per shift."
+              }
+            },
+            "violations": 1,
+            "starvation": 15
+          }
+        }
+      ]
+    }
+  ],
+  "instructions": {
+    "current": [
+      {
+        "id": "current:RT-24",
+        "role": "receiving",
+        "text": "RT-24 bongkar di Bay 3, 15.30 - 16.05",
+        "from": "Semula Bay 1 15.40"
+      },
+      {
+        "id": "current:RT-26",
+        "role": "receiving",
+        "text": "RT-26 bongkar di Bay 1, 15.15 - 15.50",
+        "from": "Semula Bay 2 14.50"
+      },
+      {
+        "id": "current:RT-27",
+        "role": "receiving",
+        "text": "RT-27 bongkar di Bay 2, 15.20 - 15.55",
+        "from": "Semula Bay 2 15.30"
+      },
+      {
+        "id": "current:RT-28",
+        "role": "receiving",
+        "text": "RT-28 bongkar di Bay 1, 16.05 - 16.40",
+        "from": "Semula Bay 3 16.05"
+      },
+      {
+        "id": "current:RT-29",
+        "role": "receiving",
+        "text": "RT-29 bongkar di Bay 3, 16.35 - 17.10",
+        "from": "Semula Bay 1 16.35"
+      },
+      {
+        "id": "current:F2",
+        "role": "supervisor",
+        "text": "Filling F2 dan F4 tetap jalan, jeda pasokan AT-2 turun dari 45 ke 0 menit",
+        "from": "Rencana awal: F2 dan F4 berhenti menunggu AT-2"
+      }
+    ],
+    "cip-molor": [
+      {
+        "id": "cip-molor:RT-24",
+        "role": "receiving",
+        "text": "RT-24 bongkar di Bay 3, 15.30 - 16.05",
+        "from": "Semula Bay 1 15.40"
+      },
+      {
+        "id": "cip-molor:RT-26",
+        "role": "receiving",
+        "text": "RT-26 bongkar di Bay 1, 15.15 - 15.50",
+        "from": "Semula Bay 2 14.50"
+      },
+      {
+        "id": "cip-molor:RT-27",
+        "role": "receiving",
+        "text": "RT-27 bongkar di Bay 3, 16.05 - 16.40",
+        "from": "Semula Bay 2 15.30"
+      },
+      {
+        "id": "cip-molor:RT-28",
+        "role": "receiving",
+        "text": "RT-28 bongkar di Bay 1, 16.00 - 16.35",
+        "from": "Semula Bay 3 16.05"
+      },
+      {
+        "id": "cip-molor:F2",
+        "role": "supervisor",
+        "text": "Filling F2 dan F4 tetap jalan, jeda pasokan AT-2 turun dari 75 ke 15 menit",
+        "from": "Rencana awal: F2 dan F4 berhenti menunggu AT-2"
+      }
+    ]
+  }
+}

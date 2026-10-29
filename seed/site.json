@@ -1,0 +1,719 @@
+{
+  "layout": {
+    "origin": {
+      "lat": -8.0993468,
+      "lon": 112.5497219,
+      "imagery": "Esri World Imagery z19",
+      "tracedAt": "2026-10-29"
+    },
+    "footprint": {
+      "min": [
+        -150,
+        0,
+        -110
+      ],
+      "max": [
+        180,
+        16,
+        165
+      ]
+    },
+    "hall": {
+      "x": -11.9,
+      "z": -71.2,
+      "thetaDeg": 13,
+      "width": 52,
+      "length": 216,
+      "roofSplitS": 62,
+      "zones": [
+        {
+          "name": "Receiving dan pemrosesan",
+          "from": 2,
+          "to": 58
+        },
+        {
+          "name": "Sterilisasi dan aseptic",
+          "from": 62,
+          "to": 100
+        },
+        {
+          "name": "Filling",
+          "from": 112,
+          "to": 182
+        },
+        {
+          "name": "Palletizing dan dispatch",
+          "from": 186,
+          "to": 214
+        }
+      ],
+      "bays": [
+        {
+          "id": "Bay 1",
+          "t": -14
+        },
+        {
+          "id": "Bay 2",
+          "t": -2
+        },
+        {
+          "id": "Bay 3",
+          "t": 10
+        }
+      ],
+      "silos": {
+        "t": -31,
+        "radius": 2.6,
+        "height": 13,
+        "items": [
+          {
+            "id": "RMT-1",
+            "s": 32
+          },
+          {
+            "id": "RMT-2",
+            "s": 40
+          },
+          {
+            "id": "RMT-3",
+            "s": 48
+          }
+        ]
+      },
+      "process": {
+        "s": 14,
+        "degassing": [
+          -18,
+          -13
+        ],
+        "thermal": [
+          -5,
+          1
+        ],
+        "separator": [
+          11,
+          16
+        ]
+      },
+      "midTanks": {
+        "ST-1": {
+          "t": -20,
+          "s": 32,
+          "r": 2.6,
+          "h": 10
+        },
+        "ST-2": {
+          "t": -12,
+          "s": 32,
+          "r": 2.6,
+          "h": 10
+        },
+        "ST-3": {
+          "t": -4,
+          "s": 32,
+          "r": 2.6,
+          "h": 10
+        },
+        "ST-4": {
+          "t": -20,
+          "s": 44,
+          "r": 2.6,
+          "h": 10
+        },
+        "ST-5": {
+          "t": -12,
+          "s": 44,
+          "r": 2.6,
+          "h": 10
+        },
+        "ST-6": {
+          "t": -4,
+          "s": 44,
+          "r": 2.6,
+          "h": 10
+        },
+        "CT-1": {
+          "t": 6,
+          "s": 30,
+          "r": 1.6,
+          "h": 6
+        },
+        "CT-2": {
+          "t": 6,
+          "s": 37,
+          "r": 1.6,
+          "h": 6
+        },
+        "CT-3": {
+          "t": 6,
+          "s": 44,
+          "r": 1.6,
+          "h": 6
+        },
+        "PM-3": {
+          "t": 14,
+          "s": 31,
+          "r": 1.5,
+          "h": 4
+        },
+        "MX-1": {
+          "t": 14,
+          "s": 44,
+          "r": 2,
+          "h": 6
+        },
+        "MX-2": {
+          "t": 20,
+          "s": 44,
+          "r": 2,
+          "h": 6
+        }
+      },
+      "lanes": [
+        {
+          "at": "AT-1",
+          "t": -20
+        },
+        {
+          "at": "AT-2",
+          "t": -10
+        },
+        {
+          "at": "AT-3",
+          "t": 0
+        },
+        {
+          "at": "AT-4",
+          "t": 10
+        },
+        {
+          "at": "AT-5",
+          "t": 20
+        }
+      ],
+      "stations": {
+        "uhtS": 72,
+        "atS": 92,
+        "fillerS": 128,
+        "fillerOffset": 2.5,
+        "conveyorFrom": 131,
+        "conveyorTo": 185,
+        "palletS": 196
+      },
+      "milkRoute": [
+        [
+          -2,
+          1
+        ],
+        [
+          -31,
+          40
+        ],
+        [
+          -15,
+          14
+        ],
+        [
+          -12,
+          38
+        ],
+        [
+          17,
+          44
+        ],
+        [
+          -10,
+          72
+        ],
+        [
+          -10,
+          92
+        ],
+        [
+          -12.5,
+          128
+        ]
+      ]
+    },
+    "buildings": [
+      {
+        "id": "gudang-kemas",
+        "x": -95.5,
+        "z": -69.5,
+        "w": 65,
+        "d": 39,
+        "rotDeg": 3,
+        "h": 10,
+        "roof": "white",
+        "label": "Gudang bahan kemas (perkiraan)"
+      },
+      {
+        "id": "utilitas",
+        "x": 50,
+        "z": -65.5,
+        "w": 44,
+        "d": 47,
+        "rotDeg": 10,
+        "h": 11,
+        "roof": "solar",
+        "label": "Utilitas: boiler, chiller, CIP (perkiraan)"
+      },
+      {
+        "id": "utilitas-annex",
+        "x": 68,
+        "z": -82,
+        "w": 15,
+        "d": 26,
+        "rotDeg": 10,
+        "h": 6,
+        "roof": "white"
+      },
+      {
+        "id": "workshop",
+        "x": 61,
+        "z": 10,
+        "w": 18,
+        "d": 97,
+        "rotDeg": 13,
+        "h": 8,
+        "roof": "solar",
+        "label": "Workshop dan suku cadang (perkiraan)"
+      },
+      {
+        "id": "gudang-fg",
+        "x": 84.6,
+        "z": 83.3,
+        "w": 28,
+        "d": 44,
+        "rotDeg": 13,
+        "h": 10,
+        "roof": "solar",
+        "label": "Gudang barang jadi (perkiraan)"
+      },
+      {
+        "id": "lab",
+        "x": -38,
+        "z": 40.5,
+        "w": 20,
+        "d": 17,
+        "rotDeg": 0,
+        "h": 6,
+        "roof": "pyramid"
+      },
+      {
+        "id": "pos-sampling",
+        "x": -44,
+        "z": 53,
+        "w": 20,
+        "d": 6,
+        "rotDeg": 0,
+        "h": 4,
+        "roof": "blue"
+      },
+      {
+        "id": "kantor",
+        "x": -101.5,
+        "z": 51,
+        "w": 53,
+        "d": 16,
+        "rotDeg": 0,
+        "h": 7,
+        "roof": "white",
+        "label": "Kantor (perkiraan)"
+      },
+      {
+        "id": "kantin",
+        "x": -64,
+        "z": 50.5,
+        "w": 22,
+        "d": 19,
+        "rotDeg": 0,
+        "h": 6,
+        "roof": "red"
+      }
+    ],
+    "roads": [
+      {
+        "pts": [
+          [
+            -185,
+            64
+          ],
+          [
+            -40,
+            64
+          ]
+        ],
+        "w": 8
+      },
+      {
+        "pts": [
+          [
+            -40,
+            64
+          ],
+          [
+            -50,
+            -10
+          ],
+          [
+            -56,
+            -72
+          ],
+          [
+            -40,
+            -92
+          ],
+          [
+            20,
+            -92
+          ]
+        ],
+        "w": 8
+      },
+      {
+        "pts": [
+          [
+            -40,
+            64
+          ],
+          [
+            -18,
+            112
+          ],
+          [
+            2,
+            162
+          ],
+          [
+            62,
+            152
+          ],
+          [
+            92,
+            122
+          ],
+          [
+            42,
+            52
+          ],
+          [
+            26,
+            -40
+          ],
+          [
+            20,
+            -92
+          ]
+        ],
+        "w": 7
+      }
+    ],
+    "paved": [
+      {
+        "x": -20,
+        "z": -92,
+        "w": 90,
+        "d": 26
+      },
+      {
+        "x": -48,
+        "z": -8,
+        "w": 18,
+        "d": 120
+      },
+      {
+        "x": -92.5,
+        "z": 78,
+        "w": 83,
+        "d": 32
+      },
+      {
+        "x": 0,
+        "z": 140,
+        "w": 30,
+        "d": 50
+      },
+      {
+        "x": 148,
+        "z": 81,
+        "w": 64,
+        "d": 58
+      }
+    ],
+    "pois": {
+      "conveyorBridge": {
+        "x": -50,
+        "z": -53.5,
+        "w": 27,
+        "d": 4
+      },
+      "gate": {
+        "x": -128,
+        "z": 56
+      },
+      "weighbridge": {
+        "x": -90,
+        "z": 64
+      },
+      "ipal": {
+        "pond": {
+          "x": 164.5,
+          "z": 110.5,
+          "w": 27,
+          "d": 21
+        },
+        "tanks": [
+          {
+            "x": 134,
+            "z": 74,
+            "r": 6
+          },
+          {
+            "x": 140,
+            "z": 90,
+            "r": 5
+          }
+        ],
+        "sludge": {
+          "x": 160,
+          "z": 76,
+          "w": 20,
+          "d": 14
+        },
+        "house": {
+          "x": 124,
+          "z": 60
+        }
+      },
+      "carPark": {
+        "x": -128,
+        "z": 72,
+        "cols": 7,
+        "rows": 2
+      },
+      "dispatchRow": {
+        "x": 0,
+        "z": 121,
+        "count": 7,
+        "step": 5.6
+      },
+      "dockTrucks": [
+        [
+          76,
+          112
+        ],
+        [
+          81,
+          124
+        ]
+      ],
+      "yard": {
+        "x": -48,
+        "slots": [
+          -42,
+          -29,
+          -16,
+          -3,
+          10,
+          23
+        ]
+      },
+      "incoming": {
+        "z": 61,
+        "from": -180,
+        "span": 130
+      }
+    },
+    "trees": [
+      [
+        105,
+        220,
+        -135,
+        40,
+        110
+      ],
+      [
+        -150,
+        100,
+        -140,
+        -110,
+        70
+      ],
+      [
+        -180,
+        -130,
+        -100,
+        40,
+        40
+      ],
+      [
+        110,
+        200,
+        125,
+        185,
+        30
+      ],
+      [
+        -60,
+        -20,
+        95,
+        185,
+        25
+      ]
+    ]
+  },
+  "status": {
+    "before": {
+      "bays": [
+        {
+          "rt": "RT-23",
+          "tone": "ok"
+        },
+        {
+          "rt": null,
+          "tone": "warn",
+          "note": "CIP sampai 15.20"
+        },
+        {
+          "rt": "RT-25",
+          "tone": "ok"
+        }
+      ],
+      "yard": [
+        {
+          "rt": "RT-26",
+          "tone": "crit"
+        },
+        {
+          "rt": "RT-24",
+          "tone": "warn"
+        },
+        {
+          "rt": "RT-27",
+          "tone": "warn"
+        },
+        {
+          "rt": "RT-28",
+          "tone": "warn"
+        },
+        {
+          "rt": "RT-29",
+          "tone": "neutral"
+        },
+        {
+          "rt": "RT-30",
+          "tone": "neutral"
+        }
+      ],
+      "lab": {
+        "tone": "crit",
+        "label": "Lab test · 3 RT · 52 mnt"
+      },
+      "at2Starved": true,
+      "starvationAt": "15.50",
+      "silos": [
+        0.69,
+        0.88,
+        0.21
+      ],
+      "onTheWay": 4
+    },
+    "after": {
+      "bays": [
+        {
+          "rt": "RT-26",
+          "tone": "ok"
+        },
+        {
+          "rt": "RT-27",
+          "tone": "ok"
+        },
+        {
+          "rt": "RT-24",
+          "tone": "ok"
+        }
+      ],
+      "yard": [
+        {
+          "rt": "RT-28",
+          "tone": "neutral"
+        },
+        {
+          "rt": "RT-29",
+          "tone": "neutral"
+        },
+        {
+          "rt": "RT-30",
+          "tone": "neutral"
+        }
+      ],
+      "lab": {
+        "tone": "warn",
+        "label": "Lab test · 2 RT"
+      },
+      "at2Starved": false,
+      "starvationAt": "",
+      "silos": [
+        0.74,
+        0.81,
+        0.43
+      ],
+      "onTheWay": 4
+    }
+  },
+  "bottlenecks": {
+    "before": [
+      {
+        "title": "Lab test",
+        "text": "3 RT menunggu hasil, rata-rata 52 menit.",
+        "tone": "crit",
+        "focus": "lab"
+      },
+      {
+        "title": "RT-26 di yard",
+        "text": "Sudah rilis lab, holding time tersisa 1j 10m.",
+        "tone": "crit",
+        "focus": "yard"
+      },
+      {
+        "title": "Bay 2",
+        "text": "CIP sampai 15.20, tetapi rencana FIFO menjadwalkan RT-26 pukul 14.50.",
+        "tone": "warn",
+        "focus": "bay2"
+      },
+      {
+        "title": "Filling F2 dan F4",
+        "text": "Rencana awal: AT-2 kosong 15.50, kedua lini berhenti 45 menit karena RMT-2 terlambat terisi.",
+        "tone": "crit",
+        "focus": "f2"
+      }
+    ],
+    "after": [
+      {
+        "title": "Lab test",
+        "text": "Masih gerbang antrean, 2 RT menunggu.",
+        "tone": "warn",
+        "focus": "lab"
+      },
+      {
+        "title": "Bay 1",
+        "text": "RT-26 bongkar 15.15 - 15.50, sebelum batas holding time.",
+        "tone": "ok",
+        "focus": "bay1"
+      },
+      {
+        "title": "Bay 2",
+        "text": "RT-27 masuk tepat setelah CIP selesai 15.20.",
+        "tone": "ok",
+        "focus": "bay2"
+      },
+      {
+        "title": "Filling F2 dan F4",
+        "text": "Pasokan dari Aseptic Tank AT-2 terjaga untuk kedua lini.",
+        "tone": "ok",
+        "focus": "f2"
+      }
+    ]
+  }
+}
