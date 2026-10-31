@@ -88,70 +88,7 @@ func (db *DB) Close() {
 	}
 }
 
-func (db *DB) migrate(ctx context.Context) error {
-	return pgx.BeginTxFunc(ctx, db.Pool, pgx.TxOptions{}, func(tx pgx.Tx) error {
-		if _, err := tx.Exec(ctx, "SELECT pg_advisory_xact_lock(728531792)"); err != nil {
-			return err
-		}
-		_, err := tx.Exec(ctx, `
-CREATE SCHEMA IF NOT EXISTS milkgraph;
-
-CREATE TABLE IF NOT EXISTS milkgraph.state (
-	entity text NOT NULL,
-	id text NOT NULL,
-	body jsonb NOT NULL,
-	updated_at timestamptz NOT NULL DEFAULT now(),
-	PRIMARY KEY (entity, id)
-);
-CREATE INDEX IF NOT EXISTS state_entity_updated ON milkgraph.state(entity, updated_at DESC, id);
-
-CREATE TABLE IF NOT EXISTS milkgraph.audit (
-	id bigserial PRIMARY KEY,
-	kind text NOT NULL,
-	title text NOT NULL,
-	detail text NOT NULL DEFAULT '',
-	note text NOT NULL DEFAULT '',
-	by_user text NOT NULL,
-	role text NOT NULL,
-	at text NOT NULL,
-	tone text NOT NULL DEFAULT 'neutral',
-	body jsonb NOT NULL,
-	created_at timestamptz NOT NULL DEFAULT now()
-);
-CREATE INDEX IF NOT EXISTS audit_kind_id ON milkgraph.audit(kind, id DESC);
-
-CREATE TABLE IF NOT EXISTS milkgraph.events (
-	id bigserial PRIMARY KEY,
-	kind text NOT NULL,
-	at timestamptz NOT NULL DEFAULT clock_timestamp(),
-	data jsonb
-);
-
-CREATE SEQUENCE IF NOT EXISTS milkgraph.hold_number;
-CREATE TABLE IF NOT EXISTS milkgraph.audit_seeds (
- fingerprint text PRIMARY KEY
-);
-
-CREATE OR REPLACE FUNCTION milkgraph.prevent_audit_modification()
-RETURNS TRIGGER AS $$
-BEGIN
-	RAISE EXCEPTION 'audit log is append-only and cannot be modified or deleted';
-END;
-$$ LANGUAGE plpgsql;
-
-DROP TRIGGER IF EXISTS trg_prevent_audit_modification ON milkgraph.audit;
-DROP TRIGGER IF EXISTS trg_prevent_audit_statement ON milkgraph.audit;
-
-UPDATE milkgraph.audit SET body = body || jsonb_build_object('id', id)
-WHERE body->'id' IS DISTINCT FROM to_jsonb(id);
-
-CREATE TRIGGER trg_prevent_audit_statement
-BEFORE UPDATE OR DELETE OR TRUNCATE ON milkgraph.audit
-FOR EACH STATEMENT EXECUTE FUNCTION milkgraph.prevent_audit_modification();
-`)
-		return err
-	})
-}
+func (db *DB) migrate(ctx context.Context) error { return migrate(ctx, db.Pool, migrationSQL) }
 
 func readState(ctx context.Context, q interface {
 	QueryRow(context.Context, string, ...any) pgx.Row

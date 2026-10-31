@@ -1,6 +1,7 @@
 # Milkgraph Backend (Go)
 
-REST JSON `/api/v1` untuk frontend `Milkgraph-Front`. Kontrak: `../Milkgraph-Front/docs/04-API-CONTRACT.md`.
+REST JSON `/api/v1` untuk frontend `Milkgraph-Front`. [Swagger 2.0 endpoint aktual](docs/swagger.yaml) (impor ke Swagger UI/Editor; file ini tidak disajikan sebagai route HTTP). Kontrak frontend: `../Milkgraph-Front/docs/04-API-CONTRACT.md`.
+Validasi: `npx -y --package @apidevtools/swagger-cli swagger-cli validate docs/swagger.yaml`.
 
 ## Status jujur
 - Data pabrik = fixture simulasi (`seed/*.json`, snapshot beku 14.42 WIB). Bukan konektor sistem nyata (PLC/SCADA/LIMS).

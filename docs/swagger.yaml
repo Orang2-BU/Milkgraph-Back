@@ -1,0 +1,4326 @@
+swagger: '2.0'
+info:
+  title: Milkgraph-Back API
+  version: 1.0.0
+  description: Dokumentasi route aktual Go. Data pabrik, jadwal, graph dan trace adalah snapshot simulasi; MODE=live
+    hanya mengubah autentikasi (JWT), tidak membuat konektor/solver live. Mutation/state, audit, event membutuhkan
+    PostgreSQL. Body JSON ditolak bila field tak dikenal. Mode demo menggunakan X-Demo-Role atau Bearer JWT; mode
+    live mewajibkan Bearer JWT HS256 dan menolak X-Demo-Role. Tidak ada endpoint login/token. CORS OPTIONS ditangani
+    middleware global (204), bukan route spesifik. Fallback 404 untuk path lain tidak dimodelkan sebagai route.
+  license:
+    name: Internal
+basePath: /
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Bearer <JWT> HS256; wajib di MODE=live, juga diterima di demo. JWT memuat exp, sub, role, name;
+      iss/aud bila dikonfigurasi.
+  demoRole:
+    type: apiKey
+    name: X-Demo-Role
+    in: header
+    description: 'Hanya MODE=demo: planner, receiving, supervisor, qa. Tidak diizinkan di MODE=live.'
+security:
+- bearerAuth: []
+- demoRole: []
+paths:
+  /api/v1/assets:
+    get:
+      summary: Assets
+      operationId: get_api_v1_assets
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Assets'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/assets/cip-log:
+    get:
+      summary: Assets/cip log
+      operationId: get_api_v1_assets_cip_log
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/CIPLog'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/assets/cip-policy:
+    get:
+      summary: Assets/cip policy
+      operationId: get_api_v1_assets_cip_policy
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/CIPPolicy'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/assets/mid-tanks:
+    get:
+      summary: Assets/mid tanks
+      operationId: get_api_v1_assets_mid_tanks
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/MidTanks'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/assistant/ask:
+    post:
+      summary: Tanya bukti terdaftar
+      operationId: post_api_v1_assistant_ask
+      description: 'Pencocokan bentuk pertanyaan terbatas. Pertanyaan lain menghasilkan {id: unknown, question};
+        bukan LLM.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/TraceAnswer'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Objek JSON.
+        schema:
+          $ref: '#/definitions/AskRequest'
+  /api/v1/assistant/templates:
+    get:
+      summary: Template pertanyaan
+      operationId: get_api_v1_assistant_templates
+      description: Tiga template dari jawaban fixture.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Templates'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/audit:
+    get:
+      summary: Audit JSON
+      operationId: get_api_v1_audit
+      description: JSON array tanpa wrapper/pagination metadata. Dari PostgreSQL atau audit fixture bila DB nil.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AuditEntry'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: kind
+        in: query
+        description: Filter kategori audit.
+        required: false
+        type: string
+        enum:
+        - rencana
+        - hold
+        - lab
+        - constraint
+        - instruksi
+      - name: before
+        in: query
+        type: integer
+        format: int64
+        minimum: 1
+        required: false
+        description: Cursor ID eksklusif; harus positif.
+      - name: limit
+        in: query
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+        required: false
+        description: Batas baris per halaman.
+  /api/v1/audit.csv:
+    get:
+      summary: Ekspor audit CSV
+      operationId: get_api_v1_audit_csv
+      description: UTF-8 BOM; Content-Disposition attachment; kolom Waktu,Jenis,Keputusan,Objek,Catatan,Oleh,Peran.
+      responses:
+        '200':
+          description: File CSV UTF-8 BOM.
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      produces:
+      - text/csv
+      - application/json
+      parameters:
+      - name: kind
+        in: query
+        description: Filter kategori audit.
+        required: false
+        type: string
+        enum:
+        - rencana
+        - hold
+        - lab
+        - constraint
+        - instruksi
+      - name: before
+        in: query
+        type: integer
+        format: int64
+        minimum: 1
+        required: false
+        description: Cursor ID eksklusif.
+      - name: limit
+        in: query
+        type: integer
+        minimum: 1
+        maximum: 1000
+        required: false
+        description: Divalidasi, tetapi ekspor tetap semua halaman (batch internal 1000), bukan membatasi hasil.
+  /api/v1/data-sources:
+    get:
+      summary: Katalog sumber data
+      operationId: get_api_v1_data_sources
+      description: Sumber fixture; simulation=true; bukan konektor aktif.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DataSource'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/data-sources/{id}/sync:
+    post:
+      summary: Simpan timestamp sync simulasi
+      operationId: post_api_v1_data_sources_id_sync
+      description: Menulis state simulation=true; tidak menarik data dari sistem eksternal. Body kosong atau {}.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: false
+        description: Objek JSON opsional; body kosong diperbolehkan.
+        schema:
+          $ref: '#/definitions/EmptyBody'
+  /api/v1/data-sources/{id}/test:
+    post:
+      summary: Uji sumber simulasi
+      operationId: post_api_v1_data_sources_id_test
+      description: Selalu ok=false, simulation=true; tidak mencoba koneksi nyata. Body kosong atau {}.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/SourceTest'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: false
+        description: Objek JSON opsional; body kosong diperbolehkan.
+        schema:
+          $ref: '#/definitions/EmptyBody'
+  /api/v1/decisions:
+    get:
+      summary: Daftar keputusan rencana
+      operationId: get_api_v1_decisions
+      description: Kosong jika DB tidak dikonfigurasi; state keputusan durable bila DB ada.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PlanDecision'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/demo/reset:
+    post:
+      summary: Reset state demo
+      operationId: post_api_v1_demo_reset
+      description: 'Menghapus state transaksi demo PostgreSQL; body kosong atau {}. Respons result.ok=true, log=null.
+
+        Hanya MODE=demo; MODE=live mengembalikan 403 setelah autentikasi.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: body
+        in: body
+        required: false
+        description: Objek JSON opsional; body kosong diperbolehkan.
+        schema:
+          $ref: '#/definitions/EmptyBody'
+  /api/v1/events:
+    get:
+      summary: Stream SSE perubahan
+      operationId: get_api_v1_events
+      description: text/event-stream; frame id/event/data JSON; heartbeat tiap 15 detik. Replay dibatasi 1000 event,
+        lalu 409. Respons error dari hub berupa text/plain.
+      responses:
+        '200':
+          description: 'Stream SSE, bukan JSON document; frame: id, event, data (JSON).'
+        '400':
+          description: Input tidak valid. Hub dapat mengembalikan text/plain, bukan Error JSON.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Konflik atau event replay terlalu panjang. Hub dapat mengembalikan text/plain, bukan Error
+            JSON.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia. Hub dapat mengembalikan text/plain, bukan Error JSON.
+          schema:
+            $ref: '#/definitions/Error'
+      produces:
+      - text/event-stream
+      - application/json
+      - text/plain
+      parameters:
+      - name: Last-Event-ID
+        in: header
+        description: Cursor event >=0 untuk replay; tanpa header mulai dari event terbaru.
+        required: false
+        type: string
+  /api/v1/graph:
+    get:
+      summary: Snapshot graph konteks
+      operationId: get_api_v1_graph
+      description: Graph fixture tervalidasi; tautan termasuk konteks/planned, bukan bukti transfer material.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Graph'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/graph/subgraph:
+    get:
+      summary: Subgraph keluar
+      operationId: get_api_v1_graph_subgraph
+      description: Snapshot fixture; bukan graph transaksi real-time.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Graph'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: node
+        in: query
+        description: ID node graph; wajib untuk hasil yang ditemukan.
+        required: true
+        type: string
+      - name: depth
+        in: query
+        type: integer
+        minimum: 0
+        maximum: 32
+        default: 1
+        required: false
+        description: Kedalaman traversal outgoing, 0..32.
+  /api/v1/holds:
+    get:
+      summary: Daftar hold
+      operationId: get_api_v1_holds
+      description: Gabungan riwayat fixture dan state hold PostgreSQL.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Hold'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Ajukan hold
+      operationId: post_api_v1_holds
+      description: 'hold.submit (planner/supervisor/qa). Lot diverifikasi dan diganti dari bukti trace. 201 + Location:
+        /api/v1/holds/{id}.
+
+        Permission: hold.submit.'
+      responses:
+        '201':
+          description: Created; result dan log JSON.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+          headers:
+            Location:
+              type: string
+              description: /api/v1/holds/{id}
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Konflik atau event replay terlalu panjang.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Objek JSON.
+        schema:
+          $ref: '#/definitions/HoldRequest'
+  /api/v1/holds/summary:
+    get:
+      summary: Holds/summary
+      operationId: get_api_v1_holds_summary
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/HoldSummary'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/holds/{id}/genealogy:
+    get:
+      summary: Genealogi hold
+      operationId: get_api_v1_holds_id_genealogy
+      description: Merakit bukti trace fixture, lab dan lokasi lot.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Genealogy'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+  /api/v1/holds/{id}/review:
+    post:
+      summary: Review hold
+      operationId: post_api_v1_holds_id_review
+      description: 'hold.review (qa). Hanya hold baru; diajukan ke aktif/ditolak, aktif ke dilepas. Note wajib untuk
+        ditolak/dilepas.
+
+        Permission: hold.review.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: true
+        description: Objek JSON.
+        schema:
+          $ref: '#/definitions/HoldReviewRequest'
+  /api/v1/instructions/{id}/ack:
+    post:
+      summary: Konfirmasi instruksi
+      operationId: post_api_v1_instructions_id_ack
+      description: 'instruction.ack (receiving/supervisor), tetapi role juga harus cocok dengan instruction. ID
+        berbentuk plan:instruction; perlu plan approved. Body kosong atau {}.
+
+        Permission: instruction.ack.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Konflik atau event replay terlalu panjang.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: false
+        description: Objek JSON opsional; body kosong diperbolehkan.
+        schema:
+          $ref: '#/definitions/EmptyBody'
+  /api/v1/lab/results:
+    get:
+      summary: Daftar hasil lab
+      operationId: get_api_v1_lab_results
+      description: Fixture + keputusan PostgreSQL; bukan koneksi LIMS.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/LabResult'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: kind
+        in: query
+        description: Filter jenis hasil lab.
+        required: false
+        type: string
+        enum:
+        - penerimaan
+        - qc-fg
+  /api/v1/lab/results/{id}/decision:
+    post:
+      summary: Putuskan hasil lab penerimaan
+      operationId: post_api_v1_lab_results_id_decision
+      description: 'lab.decide (qa). Note wajib saat ditolak; hanya hasil penerimaan berstatus hasil-siap/uji-ulang;
+        uji-ulang tidak dapat dirilis.
+
+        Permission: lab.decide.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Konflik atau event replay terlalu panjang.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: true
+        description: Objek JSON.
+        schema:
+          $ref: '#/definitions/LabDecisionRequest'
+  /api/v1/lab/summary:
+    get:
+      summary: Ringkasan lab
+      operationId: get_api_v1_lab_summary
+      description: Data skenario; respons langsung tanpa wrapper.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/LabSummary'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/limits:
+    get:
+      summary: Batas constraint
+      operationId: get_api_v1_limits
+      description: Default rules.DefaultLimits; override disimpan di PostgreSQL.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Limits'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      summary: Ganti seluruh batas constraint
+      operationId: put_api_v1_limits
+      description: 'Semua 9 key wajib; angka mengikuti min/max/step pada /limits/schema; permission constraint.edit
+        (planner).
+
+        Permission: constraint.edit.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Objek JSON.
+        schema:
+          $ref: '#/definitions/Limits'
+  /api/v1/limits/schema:
+    get:
+      summary: Skema batas constraint
+      operationId: get_api_v1_limits_schema
+      description: Param dan default berasal dari seed/limit-schema.json.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/LimitSchema'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/lots/locations:
+    get:
+      summary: Lokasi beberapa lot
+      operationId: get_api_v1_lots_locations
+      description: Tanpa ids juga menghasilkan 404 karena ID kosong tidak dikenal.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Locations'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: ids
+        in: query
+        description: ID lot dipisah koma (1..100); semua ID harus dikenal.
+        required: true
+        type: string
+  /api/v1/meta:
+    get:
+      summary: Metadata skenario
+      operationId: get_api_v1_meta
+      description: Publik; dataMode selalu simulation meski MODE=live.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Meta'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+      security: []
+  /api/v1/notifications:
+    get:
+      summary: Notifikasi skenario
+      operationId: get_api_v1_notifications
+      description: Status decision dan limits dari PostgreSQL bila tersedia; narasi dasar hardcoded.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Notifications'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/plans:
+    get:
+      summary: Daftar rencana
+      operationId: get_api_v1_plans
+      description: Rencana berasal dari fixture; resources/horizon/queueLabel ditambahkan server.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Plan'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/plans/{id}:
+    get:
+      summary: Detail rencana
+      operationId: get_api_v1_plans_id
+      description: Data skenario; respons langsung tanpa wrapper.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Plan'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+  /api/v1/plans/{id}/check:
+    post:
+      summary: Evaluasi batas skenario
+      operationId: post_api_v1_plans_id_check
+      description: Body kosong atau {} memakai limits tersimpan/default; bila limits disediakan semua key wajib.
+        Evaluasi deterministik berdasarkan fakta skenario tetap.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/CheckResult'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: false
+        description: Objek JSON opsional; body kosong diperbolehkan.
+        schema:
+          $ref: '#/definitions/LimitsOverride'
+  /api/v1/plans/{id}/decision:
+    post:
+      summary: Putuskan rekomendasi
+      operationId: post_api_v1_plans_id_decision
+      description: 'plan.decide (planner). Note wajib bila rejected; approved ditolak bila masih melanggar constraint.
+        Satu keputusan per plan.
+
+        Permission: plan.decide.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Konflik atau event replay terlalu panjang.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: true
+        description: Objek JSON.
+        schema:
+          $ref: '#/definitions/PlanDecisionRequest'
+  /api/v1/plans/{id}/instructions:
+    get:
+      summary: Instruksi rencana disetujui
+      operationId: get_api_v1_plans_id_instructions
+      description: Kosong jika DB tidak ada atau plan belum approved.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Instruction'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+  /api/v1/plans/{id}/solve:
+    post:
+      summary: Simpan simulasi rekomendasi
+      operationId: post_api_v1_plans_id_solve
+      description: 'plan.decide (planner). Menyimpan jadwal kandidat fixture + check; BUKAN solver live. Body opsional.
+
+        Permission: plan.decide.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+      - name: body
+        in: body
+        required: false
+        description: Objek JSON opsional; body kosong diperbolehkan.
+        schema:
+          $ref: '#/definitions/LimitsOverride'
+  /api/v1/production/aseptic-tanks:
+    get:
+      summary: Production/aseptic tanks
+      operationId: get_api_v1_production_aseptic_tanks
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/AsepticTanks'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/production/changeover-matrix:
+    get:
+      summary: Production/changeover matrix
+      operationId: get_api_v1_production_changeover_matrix
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/ChangeoverMatrix'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/production/fillers:
+    get:
+      summary: Production/fillers
+      operationId: get_api_v1_production_fillers
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Fillers'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/production/unit-states:
+    get:
+      summary: Production/unit states
+      operationId: get_api_v1_production_unit_states
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/UnitStates'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/quality/active-event:
+    get:
+      summary: Quality/active event
+      operationId: get_api_v1_quality_active_event
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/ActiveEvent'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/receiving:
+    get:
+      summary: Dasbor receiving
+      operationId: get_api_v1_receiving
+      description: Fixture + state limit dan keputusan lab; bukan data sensor langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Receiving'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/roles:
+    get:
+      summary: Roles
+      operationId: get_api_v1_roles
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Roles'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/session:
+    get:
+      summary: Sesi autentikasi
+      operationId: get_api_v1_session
+      description: Data skenario; respons langsung tanpa wrapper.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Session'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/session/role:
+    post:
+      summary: Pilih role demo
+      operationId: post_api_v1_session_role
+      description: 'Mengembalikan profil role; tidak menerbitkan token dan tidak mengubah autentikasi request berikutnya.
+
+        Hanya MODE=demo; MODE=live mengembalikan 403 setelah autentikasi.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/Session'
+              log:
+                type: object
+                x-nullable: true
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: body
+        in: body
+        required: true
+        description: Objek JSON.
+        schema:
+          $ref: '#/definitions/RoleSelection'
+  /api/v1/shifts:
+    get:
+      summary: Shift skenario
+      operationId: get_api_v1_shifts
+      description: Satu shift hardcoded, snapshot 14 Oktober 2026.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Shifts'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/site/bottlenecks:
+    get:
+      summary: Bottleneck site
+      operationId: get_api_v1_site_bottlenecks
+      description: Status fixture dengan overlay lab/limit; bukan telemetry.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Bottlenecks'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: view
+        in: query
+        description: Default before; menjadi after bila plan current approved.
+        required: false
+        type: string
+        enum:
+        - before
+        - after
+  /api/v1/site/layout:
+    get:
+      summary: Site/layout
+      operationId: get_api_v1_site_layout
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/SiteLayout'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/site/status:
+    get:
+      summary: Status site
+      operationId: get_api_v1_site_status
+      description: Status fixture dengan overlay lab/limit; bukan telemetry.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/SiteStatus'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '422':
+          description: Validasi bisnis/parameter gagal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: view
+        in: query
+        description: Default before; menjadi after bila plan current approved.
+        required: false
+        type: string
+        enum:
+        - before
+        - after
+  /api/v1/sources:
+    get:
+      summary: Sources
+      operationId: get_api_v1_sources
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Sources'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/sources/{id}:
+    get:
+      summary: Sumber bukti
+      operationId: get_api_v1_sources_id
+      description: Pencarian dalam seed scenario.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              time:
+                type: string
+              title:
+                type: string
+              detail:
+                type: string
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: ID sumber daya.
+  /api/v1/supply/demand-plan:
+    get:
+      summary: Rencana kebutuhan susu
+      operationId: get_api_v1_supply_demand_plan
+      description: Baris fixture, kapasitas dan densitas konstanta skenario.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/DemandPlan'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/supply/demand-sends:
+    get:
+      summary: Status kirim demand
+      operationId: get_api_v1_supply_demand_sends
+      description: Data skenario; respons langsung tanpa wrapper.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/DemandSend'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: date
+        in: query
+        description: Default 2026-10-14; tanggal lain menghasilkan sent=false.
+        required: false
+        type: string
+  /api/v1/supply/demand/send:
+    post:
+      summary: Kirim kebutuhan susu
+      operationId: post_api_v1_supply_demand_send
+      description: 'demand.send (planner). Mencatat pengiriman skenario; tidak menghubungi farm. Body kosong atau
+        {}.
+
+        Permission: demand.send.'
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/WriteResponse'
+        '400':
+          description: Input tidak valid.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Mode/permission ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: Konflik atau event replay terlalu panjang.
+          schema:
+            $ref: '#/definitions/Error'
+        '415':
+          description: Content-Type bukan application/json.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: body
+        in: body
+        required: false
+        description: Objek JSON opsional; body kosong diperbolehkan.
+        schema:
+          $ref: '#/definitions/EmptyBody'
+  /api/v1/supply/farms:
+    get:
+      summary: Supply/farms
+      operationId: get_api_v1_supply_farms
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Farms'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/supply/trend:
+    get:
+      summary: Supply/trend
+      operationId: get_api_v1_supply_trend
+      description: Snapshot fixture; tidak terhubung ke sistem pabrik langsung.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/SupplyTrend'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/trace/backward:
+    get:
+      summary: Trace ke hulu
+      operationId: get_api_v1_trace_backward
+      description: Bukti skenario terbatas; 404 bila kombinasi parameter tidak cocok.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/TraceAnswer'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: lotId
+        in: query
+        description: Parameter pencarian bukti skenario.
+        required: true
+        type: string
+  /api/v1/trace/explain:
+    get:
+      summary: Penjelasan aset
+      operationId: get_api_v1_trace_explain
+      description: Bukti skenario terbatas; 404 bila kombinasi parameter tidak cocok.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/TraceAnswer'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: resource
+        in: query
+        description: Parameter pencarian bukti skenario.
+        required: true
+        type: string
+      - name: time
+        in: query
+        description: Parameter pencarian bukti skenario.
+        required: true
+        type: string
+  /api/v1/trace/forward:
+    get:
+      summary: Trace ke hilir
+      operationId: get_api_v1_trace_forward
+      description: Bukti skenario terbatas; 404 bila kombinasi parameter tidak cocok.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/TraceAnswer'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: rtId
+        in: query
+        description: Parameter pencarian bukti skenario.
+        required: true
+        type: string
+      - name: date
+        in: query
+        description: Parameter pencarian bukti skenario.
+        required: true
+        type: string
+  /api/v1/trace/handoffs:
+    get:
+      summary: Serah terima trace
+      operationId: get_api_v1_trace_handoffs
+      description: Hanya lot yang terdaftar dalam fixture.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            $ref: '#/definitions/Handoffs'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Autentikasi gagal.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Data tidak ditemukan.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+      - name: lotId
+        in: query
+        description: ID lot bukti.
+        required: true
+        type: string
+  /healthz:
+    get:
+      summary: Liveness
+      operationId: get_healthz
+      description: Publik; tidak memeriksa database.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                enum:
+                - ok
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+      security: []
+  /readyz:
+    get:
+      summary: Kesiapan database
+      operationId: get_readyz
+      description: Publik; ping PostgreSQL; 503 jika database tidak tersedia.
+      responses:
+        '200':
+          description: Sukses.
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                enum:
+                - ready
+        '403':
+          description: Asal request/role ditolak.
+          schema:
+            $ref: '#/definitions/Error'
+        '413':
+          description: Body lebih dari 64 KiB.
+          schema:
+            $ref: '#/definitions/Error'
+        '500':
+          description: Kesalahan internal.
+          schema:
+            $ref: '#/definitions/Error'
+        '503':
+          description: Database atau realtime tidak tersedia.
+          schema:
+            $ref: '#/definitions/Error'
+      security: []
+definitions:
+  Error:
+    type: object
+    properties:
+      error:
+        $ref: '#/definitions/ErrorDetail'
+    required:
+    - error
+  ErrorDetail:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      field:
+        type: string
+    required:
+    - code
+    - message
+  EmptyBody:
+    type: object
+    properties: {}
+  RoleSelection:
+    type: object
+    properties:
+      role:
+        type: string
+        enum:
+        - planner
+        - receiving
+        - supervisor
+        - qa
+    required:
+    - role
+  AskRequest:
+    type: object
+    properties:
+      question:
+        type: string
+        minLength: 1
+        maxLength: 1000
+    required:
+    - question
+  PlanDecisionRequest:
+    type: object
+    properties:
+      status:
+        type: string
+        enum:
+        - approved
+        - rejected
+      note:
+        type: string
+        maxLength: 500
+    required:
+    - status
+  LabDecisionRequest:
+    type: object
+    properties:
+      status:
+        type: string
+        enum:
+        - dirilis
+        - ditolak
+      note:
+        type: string
+        maxLength: 500
+    required:
+    - status
+  HoldReviewRequest:
+    type: object
+    properties:
+      status:
+        type: string
+        enum:
+        - aktif
+        - ditolak
+        - dilepas
+      note:
+        type: string
+        maxLength: 500
+    required:
+    - status
+  Lot:
+    type: object
+    properties:
+      id:
+        type: string
+      product:
+        type: string
+      percent:
+        type: integer
+      packs:
+        type: integer
+    required:
+    - id
+  HoldRequest:
+    type: object
+    properties:
+      trigger:
+        type: string
+      rt:
+        type: string
+      lots:
+        type: array
+        items:
+          $ref: '#/definitions/Lot'
+        minItems: 1
+        maxItems: 100
+      note:
+        type: string
+        maxLength: 500
+    required:
+    - trigger
+    - rt
+    - lots
+  HoldReview:
+    type: object
+    properties:
+      note:
+        type: string
+      by:
+        type: string
+      at:
+        type: string
+  Hold:
+    type: object
+    properties:
+      id:
+        type: string
+      trigger:
+        type: string
+      rt:
+        type: string
+      lots:
+        type: array
+        items:
+          $ref: '#/definitions/Lot'
+      note:
+        type: string
+      status:
+        type: string
+      by:
+        type: string
+      at:
+        type: string
+      review:
+        $ref: '#/definitions/HoldReview'
+  PlanDecision:
+    type: object
+    properties:
+      plan:
+        type: string
+      status:
+        type: string
+      note:
+        type: string
+      by:
+        type: string
+      at:
+        type: string
+  LabDecision:
+    type: object
+    properties:
+      status:
+        type: string
+      note:
+        type: string
+      by:
+        type: string
+      at:
+        type: string
+  LabResult:
+    type: object
+    properties:
+      id:
+        type: string
+      kind:
+        type: string
+      subject:
+        type: string
+      detail:
+        type: string
+      sampled:
+        type: string
+      status:
+        type: string
+      params:
+        type: array
+        items:
+          type: object
+      source:
+        type: string
+      decision:
+        $ref: '#/definitions/LabDecision'
+      eta:
+        type: string
+  Limits:
+    type: object
+    properties:
+      maxTransfer:
+        type: integer
+        minimum: 7000
+        maximum: 12000
+        multipleOf: 100
+      starvationTol:
+        type: integer
+        minimum: 0
+        maximum: 60
+        multipleOf: 5
+      maintenanceBay3:
+        type: boolean
+      holdingMin:
+        type: integer
+        minimum: 480
+        maximum: 720
+        multipleOf: 10
+      bufferMaxMin:
+        type: integer
+        minimum: 720
+        maximum: 1440
+        multipleOf: 30
+      cipBuffer:
+        type: integer
+        minimum: 0
+        maximum: 30
+        multipleOf: 5
+      breakdownF1:
+        type: boolean
+      tankMax:
+        type: integer
+        minimum: 85
+        maximum: 100
+        multipleOf: 1
+      changeoverMax:
+        type: integer
+        minimum: 0
+        maximum: 4
+        multipleOf: 1
+    required:
+    - maxTransfer
+    - starvationTol
+    - maintenanceBay3
+    - holdingMin
+    - bufferMaxMin
+    - cipBuffer
+    - breakdownF1
+    - tankMax
+    - changeoverMax
+  LimitsOverride:
+    type: object
+    properties:
+      limits:
+        $ref: '#/definitions/Limits'
+  Check:
+    type: object
+    properties:
+      ok:
+        type: boolean
+      text:
+        type: string
+  ViewCounts:
+    type: object
+    properties:
+      before:
+        type: integer
+      after:
+        type: integer
+  CheckResult:
+    type: object
+    properties:
+      before:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Check'
+      after:
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/Check'
+      violations:
+        $ref: '#/definitions/ViewCounts'
+      starvation:
+        $ref: '#/definitions/ViewCounts'
+      holdingLeft:
+        type: integer
+  Instruction:
+    type: object
+    properties:
+      id:
+        type: string
+      role:
+        type: string
+      text:
+        type: string
+      from:
+        type: string
+      ackedBy:
+        type: string
+      ackedAt:
+        type: string
+  DemandSend:
+    type: object
+    properties:
+      sent:
+        type: boolean
+      at:
+        type: string
+      by:
+        type: string
+      detail:
+        type: string
+  WriteResponse:
+    type: object
+    properties:
+      result: {}
+      log:
+        type: object
+        x-nullable: true
+    required:
+    - result
+    - log
+  AuditEntry:
+    type: object
+    properties:
+      id:
+        type: integer
+      kind:
+        type: string
+      title:
+        type: string
+      detail:
+        type: string
+      note:
+        type: string
+      by:
+        type: string
+      role:
+        type: string
+      at:
+        type: string
+      tone:
+        type: string
+  GraphNode:
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+      label:
+        type: string
+      rank:
+        type: integer
+      source:
+        type: string
+  GraphEdge:
+    type: object
+    properties:
+      id:
+        type: string
+      source:
+        type: string
+      target:
+        type: string
+      label:
+        type: string
+  Graph:
+    type: object
+    properties:
+      nodes:
+        type: array
+        items:
+          $ref: '#/definitions/GraphNode'
+      edges:
+        type: array
+        items:
+          $ref: '#/definitions/GraphEdge'
+    required:
+    - nodes
+    - edges
+  Session:
+    type: object
+    properties:
+      user:
+        type: object
+        properties:
+          name:
+            type: string
+          role:
+            type: string
+          initials:
+            type: string
+          shift:
+            type: string
+      role:
+        type: string
+      permissions:
+        type: array
+        items:
+          type: string
+  Meta:
+    type: object
+    properties:
+      schemaVersion:
+        type: string
+      mode:
+        type: string
+      dataMode:
+        type: string
+        enum:
+        - simulation
+      date:
+        type: string
+      now:
+        type: string
+      horizon:
+        type: object
+        properties:
+          start:
+            type: string
+          end:
+            type: string
+          nowOffset:
+            type: integer
+      snapshotLabel:
+        type: string
+  SourceTest:
+    type: object
+    properties:
+      ok:
+        type: boolean
+      text:
+        type: string
+      latencyMs:
+        type: integer
+      simulation:
+        type: boolean
+  LabSummary:
+    type: object
+    properties:
+      waiting:
+        type: integer
+      released:
+        type: integer
+      avgWaitMin:
+        type: integer
+  DemandPlan:
+    type: object
+    properties:
+      lines:
+        type: array
+        items:
+          type: object
+          properties:
+            litresPerPack:
+              type: integer
+            milk:
+              type: number
+            pack:
+              type: string
+            packs:
+              type: integer
+            sku:
+              type: string
+      processLoss:
+        type: number
+      capacityTonPerDay:
+        type: integer
+      capacityL:
+        type: integer
+      milkDensity:
+        type: number
+  Genealogy:
+    type: object
+    properties:
+      hold:
+        $ref: '#/definitions/Hold'
+      handoffs:
+        type: array
+        items:
+          type: object
+      labTests:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            subject:
+              type: string
+            result:
+              type: string
+      lots:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            product:
+              type: string
+            percent:
+              type: integer
+            packs:
+              type: integer
+            place:
+              type: string
+            shipped:
+              type: boolean
+  Roles:
+    type: object
+    properties:
+      roles:
+        type: object
+        properties:
+          planner:
+            type: object
+            properties:
+              label:
+                type: string
+              user:
+                type: string
+              initials:
+                type: string
+              focus:
+                type: string
+          receiving:
+            type: object
+            properties:
+              label:
+                type: string
+              user:
+                type: string
+              initials:
+                type: string
+              focus:
+                type: string
+          supervisor:
+            type: object
+            properties:
+              label:
+                type: string
+              user:
+                type: string
+              initials:
+                type: string
+              focus:
+                type: string
+          qa:
+            type: object
+            properties:
+              label:
+                type: string
+              user:
+                type: string
+              initials:
+                type: string
+              focus:
+                type: string
+      permissions:
+        type: object
+        properties:
+          demand.send:
+            type: object
+            properties:
+              label:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+          plan.decide:
+            type: object
+            properties:
+              label:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+          constraint.edit:
+            type: object
+            properties:
+              label:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+          instruction.ack:
+            type: object
+            properties:
+              label:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+          hold.submit:
+            type: object
+            properties:
+              label:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+          hold.review:
+            type: object
+            properties:
+              label:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+          lab.decide:
+            type: object
+            properties:
+              label:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: string
+  Sources:
+    type: array
+    items:
+      type: object
+      properties:
+        detail:
+          type: string
+        id:
+          type: string
+        node:
+          type: string
+        time:
+          type: string
+        title:
+          type: string
+  Assets:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        kind:
+          type: string
+        status:
+          type: string
+        fill:
+          type: integer
+        capacity:
+          type: integer
+        unit:
+          type: string
+        info:
+          type: string
+        tone:
+          type: string
+        source:
+          type: string
+  CIPLog:
+    type: array
+    items:
+      type: object
+      properties:
+        asset:
+          type: string
+        hoursSince:
+          type: number
+        last:
+          type: string
+        next:
+          type: string
+        status:
+          type: string
+        tone:
+          type: string
+  CIPPolicy:
+    type: object
+    properties:
+      tankIntervalHours:
+        type: integer
+  MidTanks:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        group:
+          type: string
+        content:
+          type: string
+        level:
+          type: integer
+        capacity:
+          type: integer
+        batch:
+          type: string
+        state:
+          type: string
+        note:
+          type: string
+  Fillers:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        resource:
+          type: string
+        product:
+          type: string
+        pack:
+          type: string
+        speed:
+          type: integer
+        target:
+          type: integer
+        output:
+          type: integer
+        litres:
+          type: integer
+        state:
+          type: string
+        note:
+          type: string
+        source:
+          type: string
+  AsepticTanks:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        sterilizer:
+          type: string
+        sterilizerState:
+          type: string
+        product:
+          type: string
+        level:
+          type: integer
+        capacity:
+          type: integer
+        inflow:
+          type: object
+          properties:
+            before:
+              type: integer
+            after:
+              type: integer
+        fillers:
+          type: array
+          items:
+            type: string
+        planned:
+          type: boolean
+  UnitStates:
+    type: object
+    properties:
+      jalan:
+        type: object
+        properties:
+          label:
+            type: string
+          tone:
+            type: string
+      cip:
+        type: object
+        properties:
+          label:
+            type: string
+          tone:
+            type: string
+      siaga:
+        type: object
+        properties:
+          label:
+            type: string
+          tone:
+            type: string
+      breakdown:
+        type: object
+        properties:
+          label:
+            type: string
+          tone:
+            type: string
+      ganti-format:
+        type: object
+        properties:
+          label:
+            type: string
+          tone:
+            type: string
+  ChangeoverMatrix:
+    type: object
+    properties:
+      products:
+        type: array
+        items:
+          type: string
+      minutes:
+        type: array
+        items:
+          type: array
+          items:
+            type: integer
+      note:
+        type: string
+  Farms:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        plannedRt:
+          type: integer
+        plannedL:
+          type: integer
+        arrived:
+          type: integer
+        onTheWay:
+          type: integer
+        passRate:
+          type: number
+        finding:
+          type: string
+        coolingC:
+          type: number
+        tone:
+          type: string
+  SupplyTrend:
+    type: object
+    properties:
+      months:
+        type: array
+        items:
+          type: string
+      demand:
+        type: array
+        items: {}
+      incoming:
+        type: array
+        items:
+          type: integer
+      capacity:
+        type: integer
+  ActiveEvent:
+    type: object
+    properties:
+      lot:
+        type: string
+      product:
+        type: string
+      test:
+        type: string
+      result:
+        type: string
+      time:
+        type: string
+      source:
+        type: string
+  SiteLayout:
+    type: object
+    properties:
+      origin:
+        type: object
+        properties:
+          lat:
+            type: number
+          lon:
+            type: number
+          imagery:
+            type: string
+          tracedAt:
+            type: string
+      footprint:
+        type: object
+        properties:
+          min:
+            type: array
+            items:
+              type: integer
+          max:
+            type: array
+            items:
+              type: integer
+      hall:
+        type: object
+        properties:
+          x:
+            type: number
+          z:
+            type: number
+          thetaDeg:
+            type: integer
+          width:
+            type: integer
+          length:
+            type: integer
+          roofSplitS:
+            type: integer
+          zones:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                from:
+                  type: integer
+                to:
+                  type: integer
+          bays:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                t:
+                  type: integer
+          silos:
+            type: object
+            properties:
+              t:
+                type: integer
+              radius:
+                type: number
+              height:
+                type: integer
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    s:
+                      type: integer
+          process:
+            type: object
+            properties:
+              s:
+                type: integer
+              degassing:
+                type: array
+                items:
+                  type: integer
+              thermal:
+                type: array
+                items:
+                  type: integer
+              separator:
+                type: array
+                items:
+                  type: integer
+          midTanks:
+            type: object
+            properties:
+              ST-1:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              ST-2:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              ST-3:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              ST-4:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              ST-5:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              ST-6:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              CT-1:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              CT-2:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              CT-3:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              PM-3:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: number
+                  h:
+                    type: integer
+              MX-1:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: integer
+                  h:
+                    type: integer
+              MX-2:
+                type: object
+                properties:
+                  t:
+                    type: integer
+                  s:
+                    type: integer
+                  r:
+                    type: integer
+                  h:
+                    type: integer
+          lanes:
+            type: array
+            items:
+              type: object
+              properties:
+                at:
+                  type: string
+                t:
+                  type: integer
+          stations:
+            type: object
+            properties:
+              uhtS:
+                type: integer
+              atS:
+                type: integer
+              fillerS:
+                type: integer
+              fillerOffset:
+                type: number
+              conveyorFrom:
+                type: integer
+              conveyorTo:
+                type: integer
+              palletS:
+                type: integer
+          milkRoute:
+            type: array
+            items: {}
+      buildings:
+        type: array
+        items:
+          type: object
+          properties:
+            d:
+              type: integer
+            h:
+              type: integer
+            id:
+              type: string
+            label:
+              type: string
+            roof:
+              type: string
+            rotDeg:
+              type: integer
+            w:
+              type: integer
+            x:
+              type: number
+            z:
+              type: number
+      roads:
+        type: array
+        items:
+          type: object
+          properties:
+            pts:
+              type: array
+              items:
+                type: array
+                items:
+                  type: integer
+            w:
+              type: integer
+      paved:
+        type: array
+        items:
+          type: object
+          properties:
+            d:
+              type: integer
+            w:
+              type: integer
+            x:
+              type: integer
+            z:
+              type: integer
+      pois:
+        type: object
+        properties:
+          conveyorBridge:
+            type: object
+            properties:
+              x:
+                type: integer
+              z:
+                type: number
+              w:
+                type: integer
+              d:
+                type: integer
+          gate:
+            type: object
+            properties:
+              x:
+                type: integer
+              z:
+                type: integer
+          weighbridge:
+            type: object
+            properties:
+              x:
+                type: integer
+              z:
+                type: integer
+          ipal:
+            type: object
+            properties:
+              pond:
+                type: object
+                properties:
+                  x:
+                    type: number
+                  z:
+                    type: number
+                  w:
+                    type: integer
+                  d:
+                    type: integer
+              tanks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    x:
+                      type: integer
+                    z:
+                      type: integer
+                    r:
+                      type: integer
+              sludge:
+                type: object
+                properties:
+                  x:
+                    type: integer
+                  z:
+                    type: integer
+                  w:
+                    type: integer
+                  d:
+                    type: integer
+              house:
+                type: object
+                properties:
+                  x:
+                    type: integer
+                  z:
+                    type: integer
+          carPark:
+            type: object
+            properties:
+              x:
+                type: integer
+              z:
+                type: integer
+              cols:
+                type: integer
+              rows:
+                type: integer
+          dispatchRow:
+            type: object
+            properties:
+              x:
+                type: integer
+              z:
+                type: integer
+              count:
+                type: integer
+              step:
+                type: number
+          dockTrucks:
+            type: array
+            items:
+              type: array
+              items:
+                type: integer
+          yard:
+            type: object
+            properties:
+              x:
+                type: integer
+              slots:
+                type: array
+                items:
+                  type: integer
+          incoming:
+            type: object
+            properties:
+              z:
+                type: integer
+              from:
+                type: integer
+              span:
+                type: integer
+      trees:
+        type: array
+        items:
+          type: array
+          items:
+            type: integer
+  HoldSummary:
+    type: object
+    properties:
+      baseline:
+        type: object
+        properties:
+          lots:
+            type: integer
+          packs:
+            type: integer
+  Plan:
+    type: object
+    properties:
+      id:
+        type: string
+      label:
+        type: string
+      detail:
+        type: string
+      solveTime:
+        type: string
+      turnaround:
+        type: array
+        items:
+          type: string
+      queue:
+        type: array
+        items:
+          type: integer
+      before:
+        type: array
+        items:
+          type: object
+          properties:
+            resource:
+              type: string
+            label:
+              type: string
+            start:
+              type: integer
+            end:
+              type: integer
+            type:
+              type: string
+            source:
+              type: string
+      after:
+        type: array
+        items:
+          type: object
+          properties:
+            resource:
+              type: string
+            label:
+              type: string
+            start:
+              type: integer
+            end:
+              type: integer
+            type:
+              type: string
+            source:
+              type: string
+      constraints:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            label:
+              type: string
+            before:
+              type: object
+              properties:
+                ok:
+                  type: boolean
+                text:
+                  type: string
+            after:
+              type: object
+              properties:
+                ok:
+                  type: boolean
+                text:
+                  type: string
+            source:
+              type: string
+      reasons:
+        type: array
+        items:
+          type: object
+          properties:
+            title:
+              type: string
+            text:
+              type: string
+            source:
+              type: string
+      resources:
+        type: array
+        items:
+          type: string
+      horizon:
+        type: object
+        properties:
+          start:
+            type: string
+          end:
+            type: string
+      queueLabel:
+        type: string
+  Receiving:
+    type: object
+    properties:
+      metrics:
+        type: array
+        items:
+          type: object
+          properties:
+            delta:
+              type: string
+            label:
+              type: string
+            source:
+              type: string
+            trend:
+              type: array
+              items:
+                type: number
+            unit:
+              type: string
+            value:
+              type: string
+      stages:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            label:
+              type: string
+            count:
+              type: integer
+            status:
+              type: string
+            tone:
+              type: string
+      tankers:
+        type: array
+        items:
+          type: object
+          properties:
+            age:
+              type: string
+            farm:
+              type: string
+            id:
+              type: string
+            source:
+              type: string
+            stage:
+              type: string
+            temperature:
+              type: number
+            tone:
+              type: string
+            volume:
+              type: integer
+            wait:
+              type: integer
+      assets:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            kind:
+              type: string
+            status:
+              type: string
+            fill:
+              type: integer
+            capacity:
+              type: integer
+            unit:
+              type: string
+            info:
+              type: string
+            tone:
+              type: string
+            source:
+              type: string
+      labHistory:
+        type: array
+        items:
+          type: object
+          properties:
+            hour:
+              type: string
+            minutes:
+              type: integer
+      labSummary:
+        type: object
+        properties:
+          avgMinutes:
+            type: integer
+          deltaMinutes:
+            type: integer
+          waiting:
+            type: integer
+          sourceId:
+            type: string
+      incident:
+        type: object
+        properties:
+          planId:
+            type: string
+          rt:
+            type: string
+          holdingLeftMin:
+            type: integer
+          summary:
+            type: string
+          factors:
+            type: array
+            items:
+              type: object
+              properties:
+                label:
+                  type: string
+                sourceId:
+                  type: string
+  TraceAnswer:
+    type: object
+    properties:
+      id:
+        type: string
+      question:
+        type: string
+      template:
+        type: string
+      params:
+        type: string
+      title:
+        type: string
+      conclusion:
+        type: string
+      factors:
+        type: array
+        items:
+          type: object
+          properties:
+            title:
+              type: string
+            text:
+              type: string
+            source:
+              type: string
+      nodes:
+        type: array
+        items:
+          type: string
+      edges:
+        type: array
+        items:
+          type: string
+      note:
+        type: string
+      mix:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+            percent:
+              type: integer
+    additionalProperties: true
+  Handoffs:
+    type: array
+    items:
+      type: object
+      properties:
+        step:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        batch:
+          type: string
+        kind:
+          type: string
+        window:
+          type: string
+        volume:
+          type: string
+        record:
+          type: string
+        source:
+          type: string
+        gap:
+          type: boolean
+  SiteStatus:
+    type: object
+    properties:
+      bays:
+        type: array
+        items:
+          type: object
+          properties:
+            note:
+              type: string
+            rt:
+              type: string
+            tone:
+              type: string
+      yard:
+        type: array
+        items:
+          type: object
+          properties:
+            rt:
+              type: string
+            tone:
+              type: string
+      lab:
+        type: object
+        properties:
+          tone:
+            type: string
+          label:
+            type: string
+      at2Starved:
+        type: boolean
+      starvationAt:
+        type: string
+      silos:
+        type: array
+        items:
+          type: number
+      onTheWay:
+        type: integer
+      viewLabel:
+        type: string
+  Bottlenecks:
+    type: array
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+        text:
+          type: string
+        tone:
+          type: string
+        focus:
+          type: string
+  DataSource:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      system:
+        type: string
+      protocol:
+        type: string
+      feeds:
+        type: string
+      interval:
+        type: string
+      lastSync:
+        type: string
+      records:
+        type: string
+      status:
+        type: string
+      latencyMs:
+        type: integer
+      simulation:
+        type: boolean
+  Notifications:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        sourceId:
+          type: string
+        tone:
+          type: string
+  LimitSchema:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        params:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              kind:
+                type: string
+              label:
+                type: string
+              unit:
+                type: string
+              min:
+                type: integer
+              max:
+                type: integer
+              step:
+                type: integer
+              default:
+                type: integer
+        source:
+          type: string
+        what:
+          type: string
+  Shifts:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        window:
+          type: string
+        date:
+          type: string
+        selected:
+          type: boolean
+        available:
+          type: boolean
+  Locations:
+    type: object
+    additionalProperties:
+      type: object
+      properties:
+        place:
+          type: string
+        shipped:
+          type: boolean
+  Templates:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        question:
+          type: string

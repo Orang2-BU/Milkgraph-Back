@@ -44,6 +44,12 @@ erDiagram
         bigint nextval "Sequence counter untuk ID HOLD-NNN"
     }
 
+    SCHEMA_MIGRATIONS {
+        integer version PK "Versi migrasi SQL"
+        text checksum "SHA-256 isi berkas"
+        timestamptz applied_at "Waktu migrasi diterapkan"
+    }
+
     STATE ||..o{ EVENTS : "memicu event SSE outbox"
     AUDIT ||..o{ EVENTS : "terekam bersamaan saat mutasi domain"
 ```
@@ -98,6 +104,7 @@ flowchart TD
 
 | Objek | Tipe | Keterangan & Invarian |
 |---|---|---|
+| `milkgraph.schema_migrations` | Table | Catatan versi migrasi berurutan (`version` integer PK, `checksum` SHA-256, `applied_at` timestamptz). |
 | `milkgraph.state` | Table | Key-value store fleksibel (`entity`, `id`) bertipe JSONB untuk persistensi dokumen dinamis (limits, decisions, holds, instructions ack). Diproteksi advisory lock per entitas saat mutasi. |
 | `milkgraph.audit` | Table | Ledger audit log aktivitas seluruh pengguna. Dilindungi trigger `prevent_audit_modification()` sehingga bersifat mutlak **append-only** (tidak dapat di-`UPDATE`, `DELETE`, atau `TRUNCATE`). |
 | `milkgraph.events` | Table | Outbox queue untuk event SSE real-time (`plan.decided`, `instruction.acked`, `limits.updated`, `hold.created`, `source.synced`). |
