@@ -1,0 +1,5 @@
+﻿rule_id,precedence,condition,activity,duration_minutes,additional_note
+VARIANT,FIRST,Flavour_variant_changes,Variant Changeover,X,Override Size Change dan Paper Change; CIP tetap independen
+SIZE,SECOND,Same_flavour_different_size_any_market,Size Change,X,Berlaku walau market berubah; override Paper Change; CIP tetap independen
+PAPER,THIRD,Different_market_variant_same_size_same_flavour,Paper Change,X,Tetap tambahkan CIP bila trigger terpenuhi
+NONE,LAST,Same_market_variant_same_size_same_flavour,None,,Tetap cek End Production; End Storage Volume dan SOP transisi lain

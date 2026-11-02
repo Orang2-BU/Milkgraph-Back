@@ -1,0 +1,119 @@
+﻿connection_id,source_asset_id,destination_asset_id,via_asset_id,max_flow_lph,flow_type,routing_condition
+GCON-001,FARM-SUPPLY,RT-INPUT,,X,main_milk,Delivery and measured volume recorded
+GCON-002,RT-INPUT,UB-01,,X,main_milk,Lab Release; bay available; downstream able to receive
+GCON-003,UB-01,RECEIVING-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-004,RT-INPUT,UB-02,,X,main_milk,Lab Release; bay available; downstream able to receive
+GCON-005,UB-02,RECEIVING-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-006,RT-INPUT,UB-03,,X,main_milk,Lab Release; bay available; downstream able to receive
+GCON-007,UB-03,RECEIVING-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-008,RT-INPUT,UB-04,,X,main_milk,Lab Release; bay available; downstream able to receive
+GCON-009,UB-04,RECEIVING-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-010,RECEIVING-HDR,DG-01,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-011,RECEIVING-HDR,DG-02,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-001,DG-01,RMT-01,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-002,RMT-01,TH-01,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-003,RMT-01,TH-02,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-004,DG-01,RMT-02,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-005,RMT-02,TH-01,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-006,RMT-02,TH-02,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-007,DG-01,RMT-03,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-008,RMT-03,TH-01,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-009,RMT-03,TH-02,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-010,DG-02,TH-01,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-011,DG-02,TH-02,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-012,ST-01,AT-01,,X,sterilized_product,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-013,ST-02,AT-02,,X,sterilized_product,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-014,ST-03,AT-03,,X,sterilized_product,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-015,ST-04,AT-04,,X,sterilized_product,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-016,ST-05,AT-05,,X,sterilized_product,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-017,AT-01,FL-01,PIPE-01,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-018,AT-01,FL-02,PIPE-02,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-019,AT-02,FL-03,PIPE-03,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-020,AT-02,FL-04,PIPE-04,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-021,AT-03,FL-05,PIPE-05,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-022,AT-03,FL-06,PIPE-06,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-023,AT-04,FL-07,PIPE-07,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-024,AT-04,FL-08,PIPE-08,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-025,AT-05,FL-09,PIPE-09,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+CON-026,AT-05,FL-10,PIPE-10,X,aseptic_supply,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-038,TH-01,THERM-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-039,TH-02,THERM-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-040,THERM-OUT-HDR,SFP-IN-HDR,,X,main_milk,Direct thermized milk recipe; does not bypass mandatory separation/blending for other recipes
+GCON-041,THERM-OUT-HDR,1-Sep,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-042,1-Sep,SFP-IN-HDR,,X,main_milk,Separated/standardized milk output; co-product and genealogy recorded
+GCON-043,1-Sep,CREAM-IN-HDR,,X,cream,Cream co-product; split/yield requires recipe parameters
+GCON-044,THERM-OUT-HDR,2-Sep,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-045,2-Sep,SFP-IN-HDR,,X,main_milk,Separated/standardized milk output; co-product and genealogy recorded
+GCON-046,2-Sep,CREAM-IN-HDR,,X,cream,Cream co-product; split/yield requires recipe parameters
+GCON-047,CREAM-IN-HDR,SFP-IN-HDR,,X,cream,Only destination/recipe explicitly approved for cream; not unrestricted SFP compatibility
+GCON-048,SFP-IN-HDR,SFP-01,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-049,SFP-01,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-050,MIXED-OUT-HDR,SFP-01,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-051,SFP-IN-HDR,SFP-02,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-052,SFP-02,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-053,MIXED-OUT-HDR,SFP-02,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-054,SFP-IN-HDR,SFP-03,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-055,SFP-03,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-056,MIXED-OUT-HDR,SFP-03,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-057,SFP-IN-HDR,SFP-04,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-058,SFP-04,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-059,MIXED-OUT-HDR,SFP-04,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-060,SFP-IN-HDR,SFP-05,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-061,SFP-05,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-062,MIXED-OUT-HDR,SFP-05,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-063,SFP-IN-HDR,SFP-06,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-064,SFP-06,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-065,MIXED-OUT-HDR,SFP-06,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-066,SFP-IN-HDR,SFP-07,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-067,SFP-07,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-068,MIXED-OUT-HDR,SFP-07,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-069,SFP-IN-HDR,SFP-08,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-070,SFP-08,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-071,MIXED-OUT-HDR,SFP-08,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-072,SFP-IN-HDR,SFP-09,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-073,SFP-09,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-074,MIXED-OUT-HDR,SFP-09,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-075,SFP-IN-HDR,SFP-10,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-076,SFP-10,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-077,MIXED-OUT-HDR,SFP-10,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-078,SFP-IN-HDR,SFP-11,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-079,SFP-11,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-080,MIXED-OUT-HDR,SFP-11,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-081,SFP-IN-HDR,SFP-12,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-082,SFP-12,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-083,MIXED-OUT-HDR,SFP-12,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-084,SFP-IN-HDR,SFP-13,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-085,SFP-13,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-086,MIXED-OUT-HDR,SFP-13,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-087,SFP-IN-HDR,SFP-14,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-088,SFP-14,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-089,MIXED-OUT-HDR,SFP-14,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-090,SFP-IN-HDR,SFP-15,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-091,SFP-15,SFP-OUT-HDR,,X,main_milk,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-092,MIXED-OUT-HDR,SFP-15,,X,mixed_product,Prepared batch output; record new batch/version; approved destination only
+GCON-093,CREAM-IN-HDR,CRT-01,,X,cream,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-094,CRT-01,CREAM-OUT-HDR,,X,cream,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-095,CREAM-IN-HDR,CRT-02,,X,cream,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-096,CRT-02,CREAM-OUT-HDR,,X,cream,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-097,SFP-OUT-HDR,PREMIX-01,,X,main_milk,Base milk for premix; ingredient inputs recorded separately
+GCON-098,PREMIX-01,MIX-01,,X,premix,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-099,CREAM-OUT-HDR,MIX-01,,X,cream,Only recipes requiring cream dosing
+GCON-100,MIX-01,MIXED-OUT-HDR,,X,mixed_product,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-101,PREMIX-01,MIX-02,,X,premix,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-102,CREAM-OUT-HDR,MIX-02,,X,cream,Only recipes requiring cream dosing
+GCON-103,MIX-02,MIXED-OUT-HDR,,X,mixed_product,Asset available; product/material compatible; recipe permits; capacity and flow valid
+GCON-104,SFP-OUT-HDR,ST-01,,X,to_sterilization,Compatible SKU; validated route reservation; not unlimited concurrent transfer
+GCON-105,SFP-OUT-HDR,ST-02,,X,to_sterilization,Compatible SKU; validated route reservation; not unlimited concurrent transfer
+GCON-106,SFP-OUT-HDR,ST-03,,X,to_sterilization,Compatible SKU; validated route reservation; not unlimited concurrent transfer
+GCON-107,SFP-OUT-HDR,ST-04,,X,to_sterilization,Compatible SKU; validated route reservation; not unlimited concurrent transfer
+GCON-108,SFP-OUT-HDR,ST-05,,X,to_sterilization,Compatible SKU; validated route reservation; not unlimited concurrent transfer
+GCON-109,FL-01,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-110,FL-02,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-111,FL-03,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-112,FL-04,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-113,FL-05,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-114,FL-06,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-115,FL-07,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-116,FL-08,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-117,FL-09,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded
+GCON-118,FL-10,FG-OUTPUT,,X,finished_goods,Good packs; reject; liquid consumption; finished SKU and FG status recorded

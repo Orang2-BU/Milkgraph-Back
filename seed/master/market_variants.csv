@@ -1,0 +1,3 @@
+﻿market_variant,market_name,applicable_liquid_skus
+LOCAL,Local,ALL_ACTIVE_SKUS
+EXP,Export,ALL_ACTIVE_SKUS

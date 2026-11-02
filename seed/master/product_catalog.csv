@@ -1,0 +1,9 @@
+﻿sku_id,product_name,product_family,flavour,allowed_pack_size_codes,market_variants
+ESL-FC,ESL Full Cream,ESL,Full Cream,LARGE_B;LARGE_A;ESL_320,LOCAL;EXP
+ESL-CH,ESL Chocolate,ESL,Chocolate,LARGE_B;LARGE_A;ESL_320,LOCAL;EXP
+ESL-ST,ESL Strawberry,ESL,Strawberry,LARGE_B;LARGE_A,LOCAL;EXP
+UHT-FC,UHT Full Cream,UHT,Full Cream,LARGE_B;LARGE_A;SMALL_A;SMALL_B,LOCAL;EXP
+UHT-ST,UHT Strawberry,UHT,Strawberry,LARGE_B;LARGE_A;SMALL_A;SMALL_B,LOCAL;EXP
+UHT-CH,UHT Chocolate,UHT,Chocolate,LARGE_B;LARGE_A;SMALL_A;SMALL_B,LOCAL;EXP
+UHT-WC,UHT WC,UHT,WC,LARGE_A,LOCAL;EXP
+UHT-SK,UHT Skim,UHT Skim,Skim,LARGE_A,LOCAL;EXP

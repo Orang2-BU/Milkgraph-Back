@@ -1,0 +1,74 @@
+﻿asset_id,asset_type,compatible_product_family,capacity_l,input_flow_lph,output_flow_lph,process_speed_lph,holding_time_limit_hours,cip_duration_minutes,speed_packph,node_role,asset_name
+UB-01,Unloading Bay,,X,X,X,X,X,X,N/A,process_asset,Unloading Bay
+UB-02,Unloading Bay,,X,X,X,X,X,X,N/A,process_asset,Unloading Bay
+UB-03,Unloading Bay,,X,X,X,X,X,X,N/A,process_asset,Unloading Bay
+UB-04,Unloading Bay,,X,X,X,X,X,X,N/A,process_asset,Unloading Bay
+DG-01,Degassing,,X,X,X,X,X,X,N/A,process_asset,Degassing
+DG-02,Degassing,,X,X,X,X,X,X,N/A,process_asset,Degassing
+RMT-01,Raw Milk Tank,Raw Milk,X,X,X,X,X,X,N/A,process_asset,Raw Milk Tank
+RMT-02,Raw Milk Tank,Raw Milk,X,X,X,X,X,X,N/A,process_asset,Raw Milk Tank
+RMT-03,Raw Milk Tank,Raw Milk,X,X,X,X,X,X,N/A,process_asset,Raw Milk Tank
+TH-01,Thermizer,,X,X,X,X,X,X,N/A,process_asset,Thermizer
+TH-02,Thermizer,,X,X,X,X,X,X,N/A,process_asset,Thermizer
+SFP-01,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-02,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-03,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-04,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-05,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-06,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-07,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-08,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-09,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-10,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-11,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-12,SFP Storage Tank,UHT;ESL;UHT Skim,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-13,SFP Storage Tank,UHT;ESL,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-14,SFP Storage Tank,UHT;ESL,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+SFP-15,SFP Storage Tank,UHT;ESL,X,X,X,X,X,X,N/A,process_asset,SFP Storage Tank
+CRT-01,Cream Tank,,X,X,X,X,X,X,N/A,process_asset,Cream Tank
+CRT-02,Cream Tank,,X,X,X,X,X,X,N/A,process_asset,Cream Tank
+ST-01,Sterilizer,ESL,X,X,X,X,X,X,N/A,process_asset,Sterilizer
+ST-02,Sterilizer,ESL,X,X,X,X,X,X,N/A,process_asset,Sterilizer
+ST-03,Sterilizer,UHT;UHT Skim,X,X,X,X,X,X,N/A,process_asset,Sterilizer
+ST-04,Sterilizer,UHT;UHT Skim,X,X,X,X,X,X,N/A,process_asset,Sterilizer
+ST-05,Sterilizer,UHT,X,X,X,X,X,X,N/A,process_asset,Sterilizer
+AT-01,Aseptic Tank,ESL,X,X,X,X,X,X,N/A,process_asset,Aseptic Tank
+AT-02,Aseptic Tank,ESL,X,X,X,X,X,X,N/A,process_asset,Aseptic Tank
+AT-03,Aseptic Tank,UHT;UHT Skim,X,X,X,X,X,X,N/A,process_asset,Aseptic Tank
+AT-04,Aseptic Tank,UHT;UHT Skim,X,X,X,X,X,X,N/A,process_asset,Aseptic Tank
+AT-05,Aseptic Tank,UHT,X,X,X,X,X,X,N/A,process_asset,Aseptic Tank
+FL-01,Filling Line,ESL,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-02,Filling Line,ESL,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-03,Filling Line,ESL,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-04,Filling Line,ESL,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-05,Filling Line,UHT,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-06,Filling Line,UHT,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-07,Filling Line,UHT;UHT Skim,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-08,Filling Line,UHT,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-09,Filling Line,UHT,X,X,X,N/A,X,X,X,process_asset,Filling Line
+FL-10,Filling Line,UHT,X,X,X,N/A,X,X,X,process_asset,Filling Line
+PIPE-01,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-02,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-03,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-04,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-05,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-06,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-07,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-08,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-09,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+PIPE-10,Dedicated Pipe,,X,X,X,X,X,X,N/A,physical_pipe,Dedicated Pipe
+RECEIVING-HDR,Logical Routing Header,,N/A,X,X,N/A,N/A,X,N/A,logical_junction,Receiving discharge header
+THERM-OUT-HDR,Logical Routing Header,,N/A,X,X,N/A,N/A,X,N/A,logical_junction,Thermized milk distribution header
+SFP-IN-HDR,Logical Routing Header,,N/A,X,X,N/A,N/A,X,N/A,logical_junction,Storage main milk inlet header
+SFP-OUT-HDR,Logical Routing Header,,N/A,X,X,N/A,N/A,X,N/A,logical_junction,Storage outlet / sterilization supply header
+CREAM-IN-HDR,Logical Routing Header,,N/A,X,X,N/A,N/A,X,N/A,logical_junction,Separator cream distribution header
+CREAM-OUT-HDR,Logical Routing Header,,N/A,X,X,N/A,N/A,X,N/A,logical_junction,Cream dosing / blending supply header
+MIXED-OUT-HDR,Logical Routing Header,,N/A,X,X,N/A,N/A,X,N/A,logical_junction,Mixed product storage return header
+FARM-SUPPLY,Farm Supply Boundary,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,material_source,Farm Supply Boundary
+RT-INPUT,Road Tanker Delivery Boundary,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,delivery_source,Road Tanker Delivery Boundary
+FG-OUTPUT,Finished Goods Batch Boundary,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,finished_goods_sink,Finished Goods Batch Boundary
+1-Sep,Separation / Standardization,,N/A,X,X,X,N/A,X,N/A,process_asset,Separation / Standardization
+2-Sep,Separation / Standardization,,N/A,X,X,X,N/A,X,N/A,process_asset,Separation / Standardization
+PREMIX-01,Premix Tank,,X,X,X,X,X,X,N/A,process_asset,Premix Tank
+MIX-01,Mixing Tank,,X,X,X,X,X,X,N/A,process_asset,Mixing Tank
+MIX-02,Mixing Tank,,X,X,X,X,X,X,N/A,process_asset,Mixing Tank

@@ -1,0 +1,8 @@
+﻿field,applies_to,unit,definition
+capacity_l,Storage / buffer tanks,L,Volume that can be stored at a time; N/A on logical junctions
+input_flow_lph,Liquid receiving assets,L/hour,Maximum liquid inlet rate
+output_flow_lph,Liquid supply assets,L/hour,Maximum liquid outlet rate
+process_speed_lph,Liquid process machines; not Filling Line,L/hour,Nominal liquid processing throughput
+speed_packph,Filling Line,packs/hour,Machine pack rate; convert using actual pack size to compare with AT/pipe L/hour
+holding_time_limit_hours,Material held in tank,hour,Limit by batch/condition; no automatic age reset on refill
+cip_duration_minutes,Assets / pipes requiring cleaning,minute,Cleaning duration; no material processing while unavailable

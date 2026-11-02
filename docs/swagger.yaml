@@ -32,6 +32,80 @@ security:
 - bearerAuth: []
 - demoRole: []
 paths:
+  /api/v1/master:
+    get:
+      summary: Ringkasan master Greenfields v2.1
+      description: Struktur tervalidasi; numericalPlanningReady=false. Data operasional lain masih fixture demo.
+      operationId: getMasterSummary
+      responses:
+        '200':
+          description: Versi, status, dan jumlah record per tabel.
+          schema:
+            type: object
+        '401':
+          description: Autentikasi wajib.
+          schema:
+            $ref: '#/definitions/Error'
+  /api/v1/master/assets:
+    get:
+      summary: Daftar aset master (73 baris)
+      operationId: getMasterAssets
+      responses:
+        '200':
+          description: Data CSV asli, termasuk nilai X dan N/A.
+          schema:
+            type: array
+            items:
+              type: object
+  /api/v1/master/connections:
+    get:
+      summary: Daftar koneksi route master (118 baris)
+      operationId: getMasterConnections
+      responses:
+        '200':
+          description: Route capability, bukan transfer aktual.
+          schema:
+            type: array
+            items:
+              type: object
+  /api/v1/master/products:
+    get:
+      summary: Produk, ukuran kemasan, dan pasar
+      operationId: getMasterProducts
+      responses:
+        '200':
+          description: Katalog produk master.
+          schema:
+            type: object
+  /api/v1/master/finished-skus:
+    get:
+      summary: Katalog SKU barang jadi
+      operationId: getMasterFinishedSKUs
+      responses:
+        '200':
+          description: SKU barang jadi master.
+          schema:
+            type: array
+            items:
+              type: object
+  /api/v1/master/lines:
+    get:
+      summary: Dedikasi lini dan whitelist kompatibilitas SKU
+      operationId: getMasterLines
+      responses:
+        '200':
+          description: Dedikasi dan relasi produk/lini.
+          schema:
+            type: object
+  /api/v1/master/rules:
+    get:
+      summary: Katalog aturan, CIP, changeover, dan unit
+      operationId: getMasterRules
+      responses:
+        '200':
+          description: Deskripsi aturan, bukan evaluasi operasional.
+          schema:
+            type: object
   /api/v1/assets:
     get:
       summary: Assets

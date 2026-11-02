@@ -1,0 +1,22 @@
+﻿rule_id,scope,description
+RECEIVING_GATE,receiving,Unloading hanya setelah Lab Release dan bay tersedia.
+BAY_EXCLUSIVE,receiving,Bay tidak boleh melayani tanker berbeda pada waktu yang bertumpang tindih.
+DEGASSING,process,Degassing tidak dijadikan speed bottleneck dalam challenge.
+CAPACITY,tank,Inventory tidak negatif dan tidak melebihi usable capacity.
+FLOW,process,Flow aktual harus berada dalam batas sumber; jalur; mesin; destination.
+NOMINAL_NOT_ACTUAL,measurement,Nominal flow adalah batas/estimasi; bukan bukti actual volume.
+HOLDING,tank,Hitung umur material dari batch; refill tidak otomatis mereset umur material lama.
+CONNECTION,routing,Hanya listed edges; logical header bukan mesin fisik atau izin transfer tanpa batas; per-asset header membership adalah scenario assumption yang ditandai evidence.
+LINE_PRODUCT,filling,SKU dan pack size harus eligible pada line.
+MARKET_VARIANT,filling,Semua active SKU-size tersedia dalam LOCAL dan EXP; market variant berbeda dari flavour variant.
+CHANGEOVER_PRECEDENCE,filling,Flavour berubah: Variant Changeover override Size/Paper; flavour sama dan size berbeda: Size Change walau market berubah; flavour/size sama dan market berbeda: Paper Change; CIP independen.
+AT_SHARED_FLOW,filling,Gabungan output ke line aktif tidak melebihi AT output limit.
+AT_SAME_PRODUCT,filling,Line yang berbagi AT menerima material/SKU yang sama pada waktu yang sama.
+SIMULTANEOUS,tank,Izin simultaneous inflow/outflow dan minimum operating level ditetapkan per tank.
+PLAN,planning,Target volume; due time; dan eligibility dijaga; production window dan speed flexibility perlu finalisasi.
+MASS_BALANCE,traceability,Opening + inflow = closing + output + co-product + recovered + recorded loss + unexplained variance.
+CO_PRODUCT,process,Cream dan Skim adalah output pemisahan; bukan keduanya dihitung process loss.
+FILLING_SPEED_UNIT,filling,Filling speed dalam packs/hour; liquid draw L/hour = speed_packph * pack_size_ml / 1000; bukan process_speed_lph nominal.
+HEADER_RESOURCE,routing,Route through logical header harus reserve seluruh aset/pipe terkait; jumlah transfer paralel dan shared capacity masih perlu parameter.
+RECIPE_ROUTE,process,Direct milk route tidak boleh dipakai untuk melewati mandatory separation atau premix/mixing yang diminta recipe.
+TRANSFORM_BATCH,traceability,Mixing dan separation menciptakan output batch dengan genealogy; cream/skim co-product dan bahan premix dicatat

@@ -17,6 +17,7 @@ import (
 	"milkgraph/internal/sse"
 	"milkgraph/internal/store"
 	"milkgraph/internal/trace"
+	"milkgraph/seed/master"
 )
 
 type Server struct {
@@ -31,6 +32,7 @@ type Server struct {
 	dyn         *DynamicState
 	trace       *trace.Service
 	graph       *graph.Service
+	master      *master.Catalog
 }
 type endpoint func(*http.Request) (any, error)
 type apiError struct {
@@ -119,6 +121,10 @@ func (s *Server) Handler() http.Handler {
 	if err != nil {
 		panic(err)
 	}
+	s.master, err = master.Load(master.Files)
+	if err != nil {
+		panic(err)
+	}
 	mux := http.NewServeMux()
 	register := func(pattern, perm string, f endpoint) {
 		mux.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
@@ -170,6 +176,13 @@ func (s *Server) Handler() http.Handler {
 	for path, value := range static {
 		register("GET /api/v1"+path, "", func(r *http.Request) (any, error) { return value, nil })
 	}
+	register("GET /api/v1/master", "", func(r *http.Request) (any, error) { return s.master.Summary(), nil })
+	register("GET /api/v1/master/assets", "", func(r *http.Request) (any, error) { return s.master.Assets(), nil })
+	register("GET /api/v1/master/connections", "", func(r *http.Request) (any, error) { return s.master.Connections(), nil })
+	register("GET /api/v1/master/products", "", func(r *http.Request) (any, error) { return s.master.Products(), nil })
+	register("GET /api/v1/master/finished-skus", "", func(r *http.Request) (any, error) { return s.master.FinishedSKUs(), nil })
+	register("GET /api/v1/master/lines", "", func(r *http.Request) (any, error) { return s.master.Lines(), nil })
+	register("GET /api/v1/master/rules", "", func(r *http.Request) (any, error) { return s.master.Rules(), nil })
 	register("GET /api/v1/graph", "", func(r *http.Request) (any, error) { return s.graph.View(), nil })
 	register("GET /api/v1/graph/subgraph", "", func(r *http.Request) (any, error) {
 		node := r.URL.Query().Get("node")

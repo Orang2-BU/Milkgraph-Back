@@ -4,10 +4,12 @@ REST JSON `/api/v1` untuk frontend `Milkgraph-Front`. [Swagger 2.0 endpoint aktu
 Validasi: `npx -y --package @apidevtools/swagger-cli swagger-cli validate docs/swagger.yaml`.
 
 ## Status jujur
-- Data pabrik = fixture simulasi (`seed/*.json`, snapshot beku 14.42 WIB). Bukan konektor sistem nyata (PLC/SCADA/LIMS).
-- Rules engine, trace/genealogi, graph dihitung di Go dari fixture. Bukan solver CP-SAT umum.
-- Keputusan, hold, lab, limit, audit disimpan di PostgreSQL (audit append-only, event outbox untuk SSE).
-- Frontend belum terintegrasi; backend baru diuji lewat HTTP test.
+- Route operasional lama tetap memakai fixture simulasi (`seed/*.json`, snapshot beku 14.42 WIB). Bukan konektor sistem nyata (PLC/SCADA/LIMS).
+- Master Greenfields v2.1 dari 13 CSV asli tersedia terpisah di `seed/master/`; dimuat saat startup, divalidasi referensinya, dan hanya dibaca lewat `GET /api/v1/master`, `/master/assets`, `/master/connections`, `/master/products`, `/master/finished-skus`, `/master/lines`, `/master/rules` (header `X-Demo-Role` di mode demo atau JWT di mode live; header demo bukan autentikasi aman). Ini **belum** diimpor ke PostgreSQL dan belum mengganti graph/operasional frontend.
+- Nilai `X`, `N/A`, dan kosong dipertahankan sebagai string berbeda. `numericalPlanningReady=false`; jangan substitusi nilai asumsi ataupun menyebutnya data aktual.
+- `asset_connections` adalah route yang diizinkan, bukan transfer nyata; `via_asset_id` adalah sumber daya pipa, bukan bukti event. Trace/genealogi dan solver lama tetap berbasis fixture demo.
+- Keputusan, hold, lab, limit, audit demo disimpan di PostgreSQL (audit append-only, event outbox untuk SSE).
+- Frontend sudah punya mode API, tapi UI operasionalnya masih merender skenario demo, belum master baru.
 
 ## Jalankan
 ```

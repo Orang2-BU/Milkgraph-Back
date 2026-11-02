@@ -1,0 +1,6 @@
+﻿rule_id,trigger,asset_scope,requirement,duration_minutes
+CIP_FLAVOUR,Chocolate_or_Strawberry_to_Full_Cream,Aset yang benar-benar dilalui produk terkait,CIP selesai sebelum Full Cream diproses,X
+CIP_CH_ST,Chocolate_to_Strawberry_or_reverse,Aset yang benar-benar dilalui kedua flavour,CIP wajib untuk Chocolate ke Strawberry dan Strawberry ke Chocolate,X
+CIP_END_PRODUCTION,End_Production,Mesin dan jalur pada production run/campaign terkait,Catat event end; blokir aset untuk run berikutnya sampai Ready,X
+CIP_EMPTY,End_Storage_Volume,Raw Milk Tank;SFP Tank;Cream Tank;Premix Tank;Mixing Tank;Aseptic Tank,Tank kosong wajib CIP sebelum refill termasuk produk sama,X
+CIP_DEDUP,Multiple_triggers_same_cleaning_cycle,Satu aset,Satu cycle boleh menutup beberapa trigger; jangan hitung durasi berulang,X
