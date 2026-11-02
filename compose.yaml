@@ -21,7 +21,8 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgres://milkgraph:${POSTGRES_PASSWORD}@db:5432/milkgraph?sslmode=disable
+      DATABASE_URL: postgres://milkgraph@db:5432/milkgraph?sslmode=disable
+      PGPASSWORD: ${POSTGRES_PASSWORD:?isi POSTGRES_PASSWORD di .env}
       MODE: ${MODE:-demo}
       JWT_SECRET: ${JWT_SECRET:-}
       JWT_ISSUER: ${JWT_ISSUER:-}
