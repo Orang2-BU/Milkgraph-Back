@@ -6,6 +6,38 @@ import (
 	"testing"
 )
 
+func TestMasterTopologyRoute(t *testing.T) {
+	s := &Server{Mode: "demo"}
+	r := httptest.NewRequest("GET", "/api/v1/master/topology", nil)
+	r.Header.Set("X-Demo-Role", "planner")
+	w := httptest.NewRecorder()
+	s.Handler().ServeHTTP(w, r)
+	if w.Code != 200 {
+		t.Fatalf("status=%d body=%s", w.Code, w.Body.String())
+	}
+	var topology struct {
+		Kind  string              `json:"kind"`
+		Nodes []map[string]string `json:"nodes"`
+		Edges []map[string]string `json:"edges"`
+	}
+	if err := json.Unmarshal(w.Body.Bytes(), &topology); err != nil {
+		t.Fatal(err)
+	}
+	if topology.Kind != "route_capability" || len(topology.Nodes) != 73 || len(topology.Edges) != 118 {
+		t.Fatalf("unexpected topology: kind=%q nodes=%d edges=%d", topology.Kind, len(topology.Nodes), len(topology.Edges))
+	}
+	found := false
+	for _, edge := range topology.Edges {
+		if edge["via_asset_id"] != "" {
+			found = true
+			break
+		}
+	}
+	if !found {
+		t.Fatal("dedicated pipe route resource missing")
+	}
+}
+
 func TestMasterCatalogRoutes(t *testing.T) {
 	s := &Server{Mode: "demo"}
 	h := s.Handler()

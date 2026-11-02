@@ -5,6 +5,22 @@ import (
 	"testing"
 )
 
+func TestTopologyProjection(t *testing.T) {
+	c, err := Load(Files)
+	if err != nil {
+		t.Fatal(err)
+	}
+	top := c.Topology()
+	if top["kind"] != "route_capability" {
+		t.Fatalf("unexpected kind %v", top["kind"])
+	}
+	nodes := top["nodes"].([]Row)
+	edges := top["edges"].([]Row)
+	if len(nodes) != 73 || len(edges) != 118 {
+		t.Fatalf("nodes=%d edges=%d", len(nodes), len(edges))
+	}
+}
+
 func TestEmbeddedCatalog(t *testing.T) {
 	c, err := Load(Files)
 	if err != nil {

@@ -100,6 +100,15 @@ func (c *Catalog) Assets() []Row { return c.Tables["asset_configuration"] }
 
 func (c *Catalog) Connections() []Row { return c.Tables["asset_connections"] }
 
+// Topology returns allowed static routes. It is deliberately not a material-transfer ledger.
+func (c *Catalog) Topology() map[string]any {
+	return map[string]any{
+		"kind":  "route_capability",
+		"nodes": c.Assets(),
+		"edges": c.Connections(),
+	}
+}
+
 func (c *Catalog) Products() map[string]any {
 	return map[string]any{
 		"products":       c.Tables["product_catalog"],

@@ -179,6 +179,7 @@ func (s *Server) Handler() http.Handler {
 	register("GET /api/v1/master", "", func(r *http.Request) (any, error) { return s.master.Summary(), nil })
 	register("GET /api/v1/master/assets", "", func(r *http.Request) (any, error) { return s.master.Assets(), nil })
 	register("GET /api/v1/master/connections", "", func(r *http.Request) (any, error) { return s.master.Connections(), nil })
+	register("GET /api/v1/master/topology", "", func(r *http.Request) (any, error) { return s.master.Topology(), nil })
 	register("GET /api/v1/master/products", "", func(r *http.Request) (any, error) { return s.master.Products(), nil })
 	register("GET /api/v1/master/finished-skus", "", func(r *http.Request) (any, error) { return s.master.FinishedSKUs(), nil })
 	register("GET /api/v1/master/lines", "", func(r *http.Request) (any, error) { return s.master.Lines(), nil })

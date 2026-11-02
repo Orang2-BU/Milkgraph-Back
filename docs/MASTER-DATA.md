@@ -15,6 +15,7 @@ All require normal API authentication.
 | `GET /api/v1/master` | Version, validation status, row counts, planning readiness |
 | `GET /api/v1/master/assets` | 73 configured assets |
 | `GET /api/v1/master/connections` | 118 allowed connections |
+| `GET /api/v1/master/topology` | Directed route-capability projection: 73 assets and 118 allowed connections; `via_asset_id` stays a route pipe resource |
 | `GET /api/v1/master/products` | Liquid products, pack sizes, market variants |
 | `GET /api/v1/master/finished-skus` | Finished SKU catalog |
 | `GET /api/v1/master/lines` | Line dedication and compatibility whitelists |

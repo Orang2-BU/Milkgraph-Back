@@ -68,6 +68,16 @@ paths:
             type: array
             items:
               type: object
+  /api/v1/master/topology:
+    get:
+      summary: Proyeksi topologi route master
+      description: 73 node aset dan 118 route capability. Ini bukan ledger transfer atau genealogy material.
+      operationId: getMasterTopology
+      responses:
+        '200':
+          description: Node dan edge master, termasuk via_asset_id sebagai resource pipa.
+          schema:
+            type: object
   /api/v1/master/products:
     get:
       summary: Produk, ukuran kemasan, dan pasar
