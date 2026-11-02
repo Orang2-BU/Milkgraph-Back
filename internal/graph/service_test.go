@@ -3,7 +3,6 @@ package graph
 import (
 	"encoding/json"
 	"errors"
-	"os"
 	"reflect"
 	"strings"
 	"testing"
@@ -29,16 +28,9 @@ func TestViewMatchesFrontendAndIsIndependent(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	raw, err := os.ReadFile("../../../Milkgraph-Front/mock/scenario.json")
-	if err != nil {
-		t.Fatal(err)
-	}
-	var fixture map[string]any
-	if err := json.Unmarshal(raw, &fixture); err != nil {
-		t.Fatal(err)
-	}
+	fixture := scenario(t)
 	if !reflect.DeepEqual(s.View(), fixture["graph"]) {
-		t.Fatal("graph differs from frontend fixture")
+		t.Fatal("graph differs from fixture")
 	}
 	v := s.View()
 	v["nodes"].([]any)[0].(map[string]any)["label"] = "changed"
