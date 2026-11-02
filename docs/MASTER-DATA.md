@@ -20,6 +20,7 @@ All require normal API authentication.
 | `GET /api/v1/master/finished-skus` | Finished SKU catalog |
 | `GET /api/v1/master/lines` | Line dedication and compatibility whitelists |
 | `GET /api/v1/master/rules` | Changeover, CIP, constraint, unit catalogs |
+| `POST /api/v1/master/changeover/classify` | Deterministic changeover classifier (`VARIANT`, `SIZE`, `PAPER`, `NONE`) and CIP trigger detection (`CIP_FLAVOUR`, `CIP_CH_ST`) based on master rules |
 
 ## Validation
 

@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -75,5 +76,31 @@ func TestMasterCatalogRoutes(t *testing.T) {
 	h.ServeHTTP(w, httptest.NewRequest("GET", "/api/v1/master", nil))
 	if w.Code != 401 {
 		t.Fatalf("expected 401, got %d", w.Code)
+	}
+}
+
+func TestMasterChangeoverClassifyEndpoint(t *testing.T) {
+	s := &Server{Mode: "demo"}
+	h := s.Handler()
+
+	body := strings.NewReader(`{"from":"UHT-CH-1000-LOCAL","to":"UHT-ST-1000-LOCAL"}`)
+	r := httptest.NewRequest("POST", "/api/v1/master/changeover/classify", body)
+	r.Header.Set("Content-Type", "application/json")
+	r.Header.Set("X-Demo-Role", "planner")
+	w := httptest.NewRecorder()
+	h.ServeHTTP(w, r)
+	if w.Code != 200 {
+		t.Fatalf("status=%d body=%s", w.Code, w.Body.String())
+	}
+	var res struct {
+		RuleID      string `json:"ruleId"`
+		Activity    string `json:"activity"`
+		RequiresCIP bool   `json:"requiresCip"`
+	}
+	if err := json.Unmarshal(w.Body.Bytes(), &res); err != nil {
+		t.Fatal(err)
+	}
+	if res.RuleID != "VARIANT" || res.Activity != "Variant Changeover" || !res.RequiresCIP {
+		t.Fatalf("unexpected classification: %#v", res)
 	}
 }

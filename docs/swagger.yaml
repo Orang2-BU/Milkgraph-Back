@@ -116,6 +116,32 @@ paths:
           description: Deskripsi aturan, bukan evaluasi operasional.
           schema:
             type: object
+  /api/v1/master/changeover/classify:
+    post:
+      summary: Klasifikasi transisi changeover antar SKU barang jadi
+      description: Mengevaluasi aturan transisi (VARIANT, SIZE, PAPER, NONE) dan mendeteksi kebutuhan CIP sesuai katalog aturan master.
+      operationId: classifyMasterChangeover
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required:
+              - from
+              - to
+            properties:
+              from:
+                type: string
+                example: UHT-CH-1000-LOCAL
+              to:
+                type: string
+                example: UHT-ST-1000-LOCAL
+      responses:
+        '200':
+          description: Hasil klasifikasi transisi dan status CIP.
+          schema:
+            type: object
   /api/v1/assets:
     get:
       summary: Assets

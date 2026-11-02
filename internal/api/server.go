@@ -184,6 +184,23 @@ func (s *Server) Handler() http.Handler {
 	register("GET /api/v1/master/finished-skus", "", func(r *http.Request) (any, error) { return s.master.FinishedSKUs(), nil })
 	register("GET /api/v1/master/lines", "", func(r *http.Request) (any, error) { return s.master.Lines(), nil })
 	register("GET /api/v1/master/rules", "", func(r *http.Request) (any, error) { return s.master.Rules(), nil })
+	register("POST /api/v1/master/changeover/classify", "", func(r *http.Request) (any, error) {
+		var b struct {
+			From string `json:"from"`
+			To   string `json:"to"`
+		}
+		if err := decode(r, &b); err != nil {
+			return nil, err
+		}
+		if b.From == "" || b.To == "" {
+			return nil, invalid("Parameter from dan to wajib diisi.", "from")
+		}
+		res, err := s.master.ClassifyChangeover(b.From, b.To)
+		if err != nil {
+			return nil, invalid(err.Error(), "from")
+		}
+		return res, nil
+	})
 	register("GET /api/v1/graph", "", func(r *http.Request) (any, error) { return s.graph.View(), nil })
 	register("GET /api/v1/graph/subgraph", "", func(r *http.Request) (any, error) {
 		node := r.URL.Query().Get("node")
