@@ -32,7 +32,7 @@ func middlewareToken(t *testing.T, secret string, header, claims any) string {
 }
 
 func middlewareClaims() map[string]any {
-	return map[string]any{"sub": "user-1", "role": "planner", "name": "Rina Wulandari", "exp": time.Now().Unix() + 300}
+	return map[string]any{"sub": "user-1", "role": "planner", "name": "Rino Akbar Hanif", "exp": time.Now().Unix() + 300}
 }
 
 func TestMiddlewareHTTPHardening(t *testing.T) {

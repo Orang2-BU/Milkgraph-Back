@@ -269,7 +269,7 @@ type LimitSchemaItem struct {
 }
 
 var RolesMap = map[RoleId]RoleDef{
-	RolePlanner:    {Label: "Planner PPIC", User: "Rina Wulandari", Initials: "RW", Focus: "Rencana shift yang layak dan keputusan saat gangguan."},
+	RolePlanner:    {Label: "Planner PPIC", User: "Rino Akbar Hanif", Initials: "RA", Focus: "Rencana shift yang layak dan keputusan saat gangguan."},
 	RoleReceiving:  {Label: "Koordinator receiving", User: "Dimas Prasetyo", Initials: "DP", Focus: "Urutan RT, bay yang siap, dan RT yang mendekati batas holding time."},
 	RoleSupervisor: {Label: "Supervisor produksi", User: "Hendra Kusuma", Initials: "HK", Focus: "Lokasi bottleneck dan dampaknya ke lini filling."},
 	RoleQA:         {Label: "QA/Lab", User: "Sri Lestari", Initials: "SL", Focus: "Hasil lab, lot terdampak beserta proporsi volume, dan daftar hold."},
